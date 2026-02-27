@@ -1,72 +1,88 @@
-// SIMPLE SCRIPT - AUTO LOADS ALL IMAGES FROM YOUR FOLDER
+// CLEAN & FAST IMAGE GALLERY
 document.addEventListener('DOMContentLoaded', function() {
-  
-  // ===== PART 1: AUTOMATICALLY LOAD ALL IMAGES =====
   const gallery = document.getElementById('gallery');
-  const maxImages = 100; // Start with fewer images to test
+  const imageCountSpan = document.getElementById('imageCount');
+  const maxImages = 100; // Adjust based on your actual number of images
   
-  // Clear any existing content
-  gallery.innerHTML = '';
+  // Show loading state
+  gallery.innerHTML = '<div class="loading">Loading vintage photographs</div>';
   
-  // Function to load images one by one
+  // Store loaded images
+  let loadedImages = [];
+  let imagesLoaded = 0;
+  
+  // Function to check and load images
   function loadImages() {
-    let loadedCount = 0;
-    let imageHtml = '';
-    
-    // Try to load first 100 images
-    for (let i = 1; i <= maxImages; i++) {
-      // Create image element
-      const img = document.createElement('img');
-      img.src = `images/img${i}.jpg`;
-      img.alt = `Vintage photo ${i}`;
-      img.loading = 'lazy';
+    // Try to load images sequentially
+    function tryLoadImage(index) {
+      if (index > maxImages) {
+        // All attempts finished
+        finishLoading();
+        return;
+      }
       
-      // Handle successful load
+      const img = new Image();
+      img.src = `images/img${index}.jpg`;
+      
       img.onload = function() {
-        loadedCount++;
-        document.getElementById('imageCount').textContent = loadedCount;
-        console.log(`Loaded image ${i}`);
+        // Image exists, add to gallery
+        loadedImages.push(index);
+        imagesLoaded++;
+        imageCountSpan.textContent = imagesLoaded;
+        
+        // Continue to next image
+        tryLoadImage(index + 1);
       };
       
-      // Handle failed load - remove the image
       img.onerror = function() {
-        this.style.display = 'none';
+        // Image doesn't exist, continue to next
+        tryLoadImage(index + 1);
       };
-      
-      // Add to gallery
-      gallery.appendChild(img);
     }
     
-    // Update footer after all attempts
-    setTimeout(() => {
-      const visibleImages = document.querySelectorAll('.gallery img[style="display: none;"]').length;
-      const totalVisible = document.querySelectorAll('.gallery img:not([style*="display: none"])').length;
-      document.getElementById('imageCount').textContent = totalVisible;
-      console.log('✨ Loaded ' + totalVisible + ' vintage photographs');
-      
-      // Setup lightbox after images are loaded
-      setupLightbox();
-    }, 2000);
+    // Start loading from image 1
+    tryLoadImage(1);
   }
   
-  // Start loading
-  loadImages();
-  
-  // ===== PART 2: LIGHTBOX FUNCTIONALITY =====
-  function setupLightbox() {
-    // Get only visible images
-    const images = Array.from(document.querySelectorAll('.gallery img')).filter(
-      img => img.style.display !== 'none' && img.complete && img.naturalHeight > 0
-    );
+  // Function to render gallery after all images are found
+  function finishLoading() {
+    if (loadedImages.length === 0) {
+      gallery.innerHTML = '<div class="loading" style="color: #a68b76;">No images found in images folder</div>';
+      return;
+    }
     
+    // Clear loading message
+    gallery.innerHTML = '';
+    
+    // Create and append all image elements at once (faster)
+    const fragment = document.createDocumentFragment();
+    
+    loadedImages.forEach(num => {
+      const img = document.createElement('img');
+      img.src = `images/img${num}.jpg`;
+      img.alt = `Vintage photo ${num}`;
+      img.loading = 'lazy';
+      img.setAttribute('data-index', num);
+      fragment.appendChild(img);
+    });
+    
+    gallery.appendChild(fragment);
+    
+    // Setup lightbox after images are added
+    setupLightbox();
+  }
+  
+  // Lightbox functionality
+  function setupLightbox() {
+    const images = document.querySelectorAll('.gallery img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
     
     if (images.length === 0) return;
     
-    // Add click handlers to all images
-    images.forEach((img, index) => {
+    // Open lightbox on image click
+    images.forEach(img => {
       img.addEventListener('click', function() {
         lightboxImg.src = this.src;
         lightbox.classList.add('active');
@@ -74,28 +90,28 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Close lightbox when clicking X
-    closeBtn.addEventListener('click', function() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    // Close lightbox
+    closeBtn.addEventListener('click', closeLightbox);
     
-    // Close when clicking outside the image
     lightbox.addEventListener('click', function(e) {
       if (e.target === lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
+        closeLightbox();
       }
     });
     
-    // Keyboard navigation (ESC to close)
+    // Close on ESC key
     document.addEventListener('keydown', function(e) {
-      if (!lightbox.classList.contains('active')) return;
-      
-      if (e.key === 'Escape') {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
       }
     });
+    
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   }
+  
+  // Start loading images
+  loadImages();
 });
