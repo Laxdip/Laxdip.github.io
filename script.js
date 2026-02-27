@@ -1,117 +1,80 @@
-// ULTIMATE MOBILE FIX - Forces all images to load!
+// AUTO-DISCOVER - Finds ALL images in your folder automatically!
 document.addEventListener('DOMContentLoaded', function() {
   
   const gallery = document.getElementById('gallery');
   const username = 'laxdip';
   const repo = 'laxdip.github.io';
   
-  // Clear any cached/stuck images
-  gallery.innerHTML = '';
+  // ===== ALL IMAGE TYPES TO LOOK FOR =====
+  const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'JPG', 'PNG'];
   
-  // Force load images one by one with verification
-  function loadAllImages() {
+  // ===== LOAD IMAGES SMARTLY =====
+  function loadImages() {
     let imageHtml = '';
+    let totalAttempts = 0;
     
-    // Your exact image range (16 to 252)
-    for (let i = 16; i <= 252; i++) {
-      // Add timestamp to bypass mobile cache
-      const timestamp = new Date().getTime();
-     const imgUrl = `https://images.weserv.nl/?url=raw.githubusercontent.com/${username}/${repo}/main/images/img${i}.jpg&w=800`;
-      
-      imageHtml += `<img src="${imgUrl}" 
-                         alt="Vintage photo ${i}" 
-                         class="gallery-image"
-                         data-index="${i}"
-                         loading="lazy"
-                         onload="this.setAttribute('data-loaded', 'true')"
-                         onerror="handleImageError(this, ${i})">`;
+    // Try up to 500 images (more than enough)
+    for (let i = 1; i <= 500; i++) {
+      // Try each extension for every number
+      extensions.forEach(ext => {
+        totalAttempts++;
+        // Create image with unique ID
+        imageHtml += `<img src="https://raw.githubusercontent.com/${username}/${repo}/main/images/img${i}.${ext}" 
+                           data-number="${i}"
+                           data-ext="${ext}"
+                           alt="Vintage photo" 
+                           loading="lazy"
+                           style="display:none; opacity:1"
+                           onload="this.style.display='block'; imageLoaded(this)"
+                           onerror="tryNextExtension(this, ${i}, '${ext}')">`;
+      });
     }
     
     gallery.innerHTML = imageHtml;
     
-    // Aggressive checking - check every second for 30 seconds
-    let checkCount = 0;
-    const checkInterval = setInterval(() => {
-      checkLoadedImages();
-      checkCount++;
-      
-      // Stop after 30 checks (30 seconds)
-      if (checkCount > 30) {
-        clearInterval(checkInterval);
-        // Final count
-        const finalCount = document.querySelectorAll('.gallery img[data-loaded="true"]').length;
-        document.getElementById('imageCount').textContent = finalCount;
-        console.log('✨ Final loaded count: ' + finalCount);
-      }
-    }, 1000);
+    // Update count every 2 seconds
+    setTimeout(updateCount, 2000);
+    setTimeout(updateCount, 4000);
+    setTimeout(updateCount, 6000);
+    setTimeout(updateCount, 8000);
   }
   
-  // Global error handler
-  window.handleImageError = function(img, index) {
-    console.log(`Retrying image ${index}...`);
+  // ===== TRY NEXT EXTENSION IF CURRENT FAILS =====
+  window.tryNextExtension = function(img, number, failedExt) {
+    const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'JPG', 'PNG'];
+    const currentExtIndex = extensions.indexOf(failedExt);
     
-    // Retry with fresh timestamp
-    const timestamp = new Date().getTime();
-    img.src = `https://raw.githubusercontent.com/${username}/${repo}/main/images/img${index}.jpg?t=${timestamp}`;
-    
-    // Mark as retried
-    img.setAttribute('data-retry', 'true');
-    
-    // If still fails after retry, hide it
-    setTimeout(() => {
-      if (!img.complete || img.naturalHeight === 0) {
-        if (img.getAttribute('data-retry') === 'true') {
-          img.style.display = 'none';
-          console.log(`Image ${index} failed after retry`);
-        }
-      }
-    }, 3000);
+    // Try next extension
+    if (currentExtIndex < extensions.length - 1) {
+      const nextExt = extensions[currentExtIndex + 1];
+      img.src = `https://raw.githubusercontent.com/${username}/${repo}/main/images/img${number}.${nextExt}?t=${new Date().getTime()}`;
+      img.setAttribute('data-ext', nextExt);
+    } else {
+      // No more extensions to try - remove the image
+      img.remove();
+    }
   };
   
-  function checkLoadedImages() {
-    const allImages = document.querySelectorAll('.gallery img');
-    let loadedCount = 0;
-    let failedCount = 0;
-    
-    allImages.forEach(img => {
-      // Check if image loaded successfully
-      if (img.complete && img.naturalHeight > 0) {
-        img.setAttribute('data-loaded', 'true');
-        img.style.display = 'block';
-        loadedCount++;
-      } else if (!img.complete) {
-        // Still loading
-        failedCount++;
-      }
-    });
-    
-    // Update footer with loaded count
-    document.getElementById('imageCount').textContent = loadedCount;
-    
-    // If we have less than expected, try to reload failed ones
-    if (loadedCount < 200 && failedCount > 0) {
-      allImages.forEach(img => {
-        if (!img.complete && !img.getAttribute('data-retry')) {
-          const index = img.getAttribute('data-index');
-          if (index) {
-            const timestamp = new Date().getTime();
-            img.src = `https://raw.githubusercontent.com/${username}/${repo}/main/images/img${index}.jpg?t=${timestamp}`;
-            img.setAttribute('data-retry', 'true');
-          }
-        }
-      });
+  // ===== MARK IMAGE AS LOADED =====
+  window.imageLoaded = function(img) {
+    img.setAttribute('data-loaded', 'true');
+  };
+  
+  // ===== UPDATE IMAGE COUNT IN FOOTER =====
+  function updateCount() {
+    const loadedImages = document.querySelectorAll('.gallery img[data-loaded="true"]').length;
+    if (loadedImages > 0) {
+      document.getElementById('imageCount').textContent = loadedImages;
     }
-    
-    // Re-attach lightbox events
-    setupLightbox();
+    console.log('✨ Found ' + loadedImages + ' photographs');
   }
   
   // Start loading
-  loadAllImages();
+  loadImages();
   
-  // ===== LIGHTBOX FUNCTIONALITY =====
+  // ===== SIMPLE LIGHTBOX =====
   function setupLightbox() {
-    const images = Array.from(document.querySelectorAll('.gallery img[data-loaded="true"]'));
+    const images = document.querySelectorAll('.gallery img[data-loaded="true"]');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
@@ -119,16 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     
     images.forEach((img, index) => {
-      img.removeEventListener('click', img.clickHandler);
-      
-      img.clickHandler = function() {
+      img.addEventListener('click', function() {
         currentIndex = index;
         lightboxImg.src = this.src;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
-      };
-      
-      img.addEventListener('click', img.clickHandler);
+      });
     });
     
     closeBtn.addEventListener('click', function() {
@@ -144,12 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.addEventListener('keydown', function(e) {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
       }
     });
   }
+  
+  // Setup lightbox after images load
+  setTimeout(setupLightbox, 3000);
+  setTimeout(setupLightbox, 6000);
 });
-
