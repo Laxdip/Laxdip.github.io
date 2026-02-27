@@ -322,3 +322,31 @@ body::after {
     font-size: 0.9rem;
   }
 }
+/* Mobile-specific fixes */
+@media (max-width: 700px) {
+  .gallery {
+    column-count: 2 !important;
+  }
+  
+  .gallery img {
+    min-height: 150px;
+    background-color: #f2eadf;
+  }
+}
+
+/* Force image loading display */
+.gallery img[data-loaded="true"] {
+  display: block !important;
+}
+
+.gallery img:not([data-loaded="true"]) {
+  min-height: 150px;
+  background: linear-gradient(110deg, #f2eadf 30%, #e8dfd2 50%, #f2eadf 70%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
