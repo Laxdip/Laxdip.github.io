@@ -168,6 +168,43 @@ body::after {
   outline: 1px solid #a68b76;
 }
 
+/* ===== FIXED MOBILE GALLERY - SHOWS MULTIPLE IMAGES ===== */
+@media (max-width: 768px) {
+  .gallery {
+    column-count: 2 !important; /* Force 2 columns on mobile */
+    column-gap: 15px;
+    padding: 0 15px;
+  }
+  
+  .gallery img {
+    margin-bottom: 15px;
+    border-width: 4px; /* Slightly smaller border for mobile */
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .gallery {
+    column-count: 2 !important; /* Still 2 columns even on small phones */
+    column-gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .gallery img {
+    margin-bottom: 10px;
+    border-width: 3px;
+  }
+  
+  .header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .header p {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+}
+
 /* ===== LIGHTBOX - SIMPLE & CLEAN ===== */
 .lightbox {
   display: none;
@@ -223,22 +260,6 @@ body::after {
   transform: rotate(90deg);
 }
 
-.lightbox-counter {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #f2eadf;
-  padding: 10px 25px;
-  border-radius: 40px;
-  border: 1px solid #d9cbb8;
-  color: #5a4a3f;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  backdrop-filter: blur(4px);
-}
-
 /* ===== FOOTER ===== */
 .footer {
   text-align: center;
@@ -257,14 +278,8 @@ body::after {
   font-weight: 500;
 }
 
-/* ===== ADD THESE TO YOUR HTML (in body, after header) ===== */
-/* Just add these two lines after your header in index.html:
-   <div class="top-decoration">✦ ✦ ✦</div>
-   <div class="corner-decoration"></div>
-*/
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1000px) {
+/* ===== RESPONSIVE FOR TABLETS ===== */
+@media (min-width: 769px) and (max-width: 1000px) {
   .gallery {
     column-count: 3;
   }
@@ -274,51 +289,8 @@ body::after {
   }
 }
 
-@media (max-width: 700px) {
+@media (min-width: 1001px) and (max-width: 1200px) {
   .gallery {
-    column-count: 2;
-    column-gap: 20px;
-    padding: 0 20px;
-  }
-  
-  .gallery img {
-    margin-bottom: 20px;
-  }
-  
-  .header h1 {
-    font-size: 2.5rem;
-  }
-  
-  .header p {
-    font-size: 1rem;
-    letter-spacing: 4px;
-  }
-  
-  .top-decoration, .corner-decoration, body::after {
-    opacity: 0.15;
-  }
-}
-
-@media (max-width: 500px) {
-  .gallery {
-    column-count: 1;
-  }
-  
-  .lightbox-content {
-    max-width: 92%;
-  }
-  
-  .lightbox-close {
-    top: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    font-size: 36px;
-  }
-  
-  .lightbox-counter {
-    bottom: 20px;
-    padding: 8px 18px;
-    font-size: 0.9rem;
+    column-count: 4;
   }
 }
