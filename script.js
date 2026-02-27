@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 16; i <= 252; i++) {
       // Add timestamp to bypass mobile cache
       const timestamp = new Date().getTime();
-      const imgUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/images/img${i}.jpg?t=${timestamp}`;
+     const imgUrl = `https://images.weserv.nl/?url=raw.githubusercontent.com/${username}/${repo}/main/images/img${i}.jpg&w=800`;
       
       imageHtml += `<img src="${imgUrl}" 
                          alt="Vintage photo ${i}" 
@@ -152,3 +152,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
