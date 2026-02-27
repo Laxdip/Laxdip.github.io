@@ -1,56 +1,49 @@
-// IMPROVED SCRIPT - Better image loading for GitHub Pages
+// ULTIMATE FIX - Uses GitHub's raw content for reliable loading
 document.addEventListener('DOMContentLoaded', function() {
   
-  // ===== PART 1: AUTOMATICALLY LOAD ALL IMAGES =====
   const gallery = document.getElementById('gallery');
   
-  // Load up to 1000 images
+  // Get your GitHub username
+  const username = 'laxdip';
+  const repo = 'laxdip.github.io';
+  
+  // Load images from GitHub's raw content server (much faster!)
   function loadAllImages() {
     let imageHtml = '';
     
-    // Your images start from img16.jpg to img252.jpg
+    // Try images from 16 to 300
     for (let i = 16; i <= 300; i++) {
-      imageHtml += `<img src="images/img${i}.jpg" alt="Vintage photo ${i}" loading="lazy" onerror="this.style.display='none'">`;
+      // Use GitHub's raw content URL
+      const imgUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/images/img${i}.jpg`;
+      imageHtml += `<img src="${imgUrl}" alt="Vintage photo ${i}" loading="lazy" onerror="this.style.display='none'">`;
     }
     
     gallery.innerHTML = imageHtml;
     
-    // Check images multiple times to ensure they all load
-    setTimeout(checkExistingImages, 2000);
-    setTimeout(checkExistingImages, 4000);
-    setTimeout(checkExistingImages, 6000);
+    // Check loading status multiple times
+    setTimeout(checkLoadedImages, 2000);
+    setTimeout(checkLoadedImages, 4000);
+    setTimeout(checkLoadedImages, 6000);
+    setTimeout(checkLoadedImages, 8000);
   }
   
-  // Function to check which images loaded
-  function checkExistingImages() {
+  function checkLoadedImages() {
     const allImages = document.querySelectorAll('.gallery img');
     let loadedCount = 0;
-    let totalVisible = 0;
     
     allImages.forEach(img => {
-      // Check if image loaded successfully
       if (img.complete && img.naturalHeight > 0) {
         img.style.display = 'block';
         loadedCount++;
-      } else if (img.style.display !== 'none') {
-        // If not loaded but not hidden, keep it but don't count yet
-        totalVisible++;
       }
     });
     
-    // Update footer with loaded count
     document.getElementById('imageCount').textContent = loadedCount;
-    
-    // Re-attach lightbox events
     setupLightbox();
-    
-    console.log('✨ Loaded ' + loadedCount + ' vintage photographs');
   }
   
-  // Load all images
   loadAllImages();
   
-  // ===== PART 2: LIGHTBOX FUNCTIONALITY =====
   function setupLightbox() {
     const images = Array.from(document.querySelectorAll('.gallery img')).filter(
       img => img.style.display !== 'none'
@@ -89,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.addEventListener('keydown', function(e) {
       if (!lightbox.classList.contains('active')) return;
-      
       if (e.key === 'Escape') {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
