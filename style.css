@@ -157,7 +157,7 @@ body::after {
   break-inside: avoid;
   display: block;
   position: relative;
-  background: #f2eadf; /* matches border for loading */
+  background: #f2eadf;
 }
 
 .gallery img:hover {
@@ -168,24 +168,23 @@ body::after {
   outline: 1px solid #a68b76;
 }
 
-/* ===== FIXED MOBILE GALLERY - SHOWS MULTIPLE IMAGES ===== */
+/* ===== MOBILE FIX - ALWAYS SHOW 2 COLUMNS ===== */
 @media (max-width: 768px) {
   .gallery {
-    column-count: 2 !important; /* Force 2 columns on mobile */
+    column-count: 2 !important;
     column-gap: 15px;
     padding: 0 15px;
   }
   
   .gallery img {
     margin-bottom: 15px;
-    border-width: 4px; /* Slightly smaller border for mobile */
+    border-width: 4px;
   }
 }
 
-/* Small phones */
 @media (max-width: 480px) {
   .gallery {
-    column-count: 2 !important; /* Still 2 columns even on small phones */
+    column-count: 2 !important;
     column-gap: 10px;
     padding: 0 10px;
   }
@@ -194,18 +193,9 @@ body::after {
     margin-bottom: 10px;
     border-width: 3px;
   }
-  
-  .header h1 {
-    font-size: 2.2rem;
-  }
-  
-  .header p {
-    font-size: 0.9rem;
-    letter-spacing: 3px;
-  }
 }
 
-/* ===== LIGHTBOX - SIMPLE & CLEAN ===== */
+/* ===== LIGHTBOX ===== */
 .lightbox {
   display: none;
   position: fixed;
@@ -286,11 +276,5 @@ body::after {
   
   .header h1 {
     font-size: 3.2rem;
-  }
-}
-
-@media (min-width: 1001px) and (max-width: 1200px) {
-  .gallery {
-    column-count: 4;
   }
 }
