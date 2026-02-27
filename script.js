@@ -1,4 +1,4 @@
-// SIMPLE SCRIPT - AUTO LOADS ALL IMAGES FROM YOUR FOLDER
+// IMPROVED SCRIPT - Better image loading for GitHub Pages
 document.addEventListener('DOMContentLoaded', function() {
   
   // ===== PART 1: AUTOMATICALLY LOAD ALL IMAGES =====
@@ -8,46 +8,50 @@ document.addEventListener('DOMContentLoaded', function() {
   function loadAllImages() {
     let imageHtml = '';
     
-    for (let i = 1; i <= 1000; i++) {
-      imageHtml += `<img src="images/img${i}.jpg" alt="Vintage photo ${i}" loading="lazy">`;
+    // Your images start from img16.jpg to img252.jpg
+    for (let i = 16; i <= 300; i++) {
+      imageHtml += `<img src="images/img${i}.jpg" alt="Vintage photo ${i}" loading="lazy" onerror="this.style.display='none'">`;
     }
     
     gallery.innerHTML = imageHtml;
     
-    // Small delay to let images start loading, then check which ones actually exist
-    setTimeout(checkExistingImages, 1000);
+    // Check images multiple times to ensure they all load
+    setTimeout(checkExistingImages, 2000);
+    setTimeout(checkExistingImages, 4000);
+    setTimeout(checkExistingImages, 6000);
   }
   
-  // Function to remove broken image links
+  // Function to check which images loaded
   function checkExistingImages() {
     const allImages = document.querySelectorAll('.gallery img');
-    let existingCount = 0;
+    let loadedCount = 0;
+    let totalVisible = 0;
     
     allImages.forEach(img => {
       // Check if image loaded successfully
-      if (img.complete && img.naturalHeight !== 0) {
-        existingCount++;
-      } else {
-        // If image failed to load, remove it from gallery
-        img.style.display = 'none';
+      if (img.complete && img.naturalHeight > 0) {
+        img.style.display = 'block';
+        loadedCount++;
+      } else if (img.style.display !== 'none') {
+        // If not loaded but not hidden, keep it but don't count yet
+        totalVisible++;
       }
     });
     
-    // Update footer with actual image count
-    document.getElementById('imageCount').textContent = existingCount;
+    // Update footer with loaded count
+    document.getElementById('imageCount').textContent = loadedCount;
     
-    // Re-attach lightbox events for existing images
+    // Re-attach lightbox events
     setupLightbox();
     
-    console.log('✨ Loaded ' + existingCount + ' vintage photographs');
+    console.log('✨ Loaded ' + loadedCount + ' vintage photographs');
   }
   
   // Load all images
   loadAllImages();
   
-  // ===== PART 2: LIGHTBOX FUNCTIONALITY (NO COUNTER) =====
+  // ===== PART 2: LIGHTBOX FUNCTIONALITY =====
   function setupLightbox() {
-    // Get only images that successfully loaded
     const images = Array.from(document.querySelectorAll('.gallery img')).filter(
       img => img.style.display !== 'none'
     );
@@ -58,12 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentIndex = 0;
     
-    // Remove any old event listeners and add new ones
     images.forEach((img, index) => {
-      // Remove old listener if any (to prevent duplicates)
       img.removeEventListener('click', img.clickHandler);
       
-      // Create new handler (NO COUNTER CODE)
       img.clickHandler = function() {
         currentIndex = index;
         lightboxImg.src = this.src;
@@ -71,17 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'hidden';
       };
       
-      // Add new listener
       img.addEventListener('click', img.clickHandler);
     });
     
-    // Close lightbox when clicking X
     closeBtn.addEventListener('click', function() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
     });
     
-    // Close when clicking outside the image
     lightbox.addEventListener('click', function(e) {
       if (e.target === lightbox) {
         lightbox.classList.remove('active');
@@ -89,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Keyboard navigation (ESC to close)
     document.addEventListener('keydown', function(e) {
       if (!lightbox.classList.contains('active')) return;
       
