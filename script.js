@@ -1,72 +1,102 @@
-// INSTANT LOADING IMAGE GALLERY
+// SIMPLE SCRIPT - AUTO LOADS ALL IMAGES FROM YOUR FOLDER
 document.addEventListener('DOMContentLoaded', function() {
+  
+  // ===== PART 1: AUTOMATICALLY LOAD ALL IMAGES =====
   const gallery = document.getElementById('gallery');
-  const imageCountSpan = document.getElementById('imageCount');
   
-  // Maximum images to check (change this based on your actual count)
-  const MAX_IMAGES = 50; // Adjust this number to match your actual images
-  
-  let html = '';
-  let existingCount = 0;
-  
-  // Generate all images at once - INSTANT
-  for (let i = 1; i <= MAX_IMAGES; i++) {
-    html += `<img src="images/img${i}.jpg" alt="Vintage photo ${i}" loading="lazy" onerror="this.style.display='none'" onload="updateCount(this)">`;
+  // Load up to 1000 images
+  function loadAllImages() {
+    let imageHtml = '';
+    
+    for (let i = 1; i <= 1000; i++) {
+      imageHtml += `<img src="images/img${i}.jpg" alt="Vintage photo ${i}" loading="lazy">`;
+    }
+    
+    gallery.innerHTML = imageHtml;
+    
+    // Small delay to let images start loading, then check which ones actually exist
+    setTimeout(checkExistingImages, 1000);
   }
   
-  // Insert all images at once
-  gallery.innerHTML = html;
+  // Function to remove broken image links
+  function checkExistingImages() {
+    const allImages = document.querySelectorAll('.gallery img');
+    let existingCount = 0;
+    
+    allImages.forEach(img => {
+      // Check if image loaded successfully
+      if (img.complete && img.naturalHeight !== 0) {
+        existingCount++;
+      } else {
+        // If image failed to load, remove it from gallery
+        img.style.display = 'none';
+      }
+    });
+    
+    // Update footer with actual image count
+    document.getElementById('imageCount').textContent = existingCount;
+    
+    // Re-attach lightbox events for existing images
+    setupLightbox();
+    
+    console.log('✨ Loaded ' + existingCount + ' vintage photographs');
+  }
   
-  // Function to count loaded images
-  window.updateCount = function(img) {
-    existingCount++;
-    imageCountSpan.textContent = existingCount;
-  };
+  // Load all images
+  loadAllImages();
   
-  // Final count after all images attempt to load
-  setTimeout(() => {
-    const visibleImages = document.querySelectorAll('.gallery img[style*="display: none"]').length;
-    const totalVisible = document.querySelectorAll('.gallery img:not([style*="display: none"])').length;
-    imageCountSpan.textContent = totalVisible;
-  }, 500);
-  
-  // ===== LIGHTBOX FUNCTIONALITY =====
-  setTimeout(() => {
-    const images = document.querySelectorAll('.gallery img:not([style*="display: none"])');
+  // ===== PART 2: LIGHTBOX FUNCTIONALITY (NO COUNTER) =====
+  function setupLightbox() {
+    // Get only images that successfully loaded
+    const images = Array.from(document.querySelectorAll('.gallery img')).filter(
+      img => img.style.display !== 'none'
+    );
+    
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
     
-    if (images.length === 0) return;
+    let currentIndex = 0;
     
-    // Open lightbox
-    images.forEach(img => {
-      img.addEventListener('click', function() {
+    // Remove any old event listeners and add new ones
+    images.forEach((img, index) => {
+      // Remove old listener if any (to prevent duplicates)
+      img.removeEventListener('click', img.clickHandler);
+      
+      // Create new handler (NO COUNTER CODE)
+      img.clickHandler = function() {
+        currentIndex = index;
         lightboxImg.src = this.src;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
-      });
+      };
+      
+      // Add new listener
+      img.addEventListener('click', img.clickHandler);
     });
     
-    // Close lightbox
-    closeBtn.addEventListener('click', () => {
+    // Close lightbox when clicking X
+    closeBtn.addEventListener('click', function() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
     });
     
-    lightbox.addEventListener('click', (e) => {
+    // Close when clicking outside the image
+    lightbox.addEventListener('click', function(e) {
       if (e.target === lightbox) {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
       }
     });
     
-    // ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    // Keyboard navigation (ESC to close)
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
       }
     });
-  }, 100);
+  }
 });
