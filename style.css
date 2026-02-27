@@ -143,25 +143,16 @@ body::before {
   }
 }
 
-/* Mobile Landscape */
+/* Mobile */
 @media (max-width: 600px) {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 0 12px;
+    gap: 10px;
+    padding: 0 10px;
   }
   
   .gallery img {
     border-width: 3px;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 380px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    padding: 0 8px;
   }
 }
 
@@ -230,25 +221,4 @@ body::before {
 .footer span {
   color: #a68b76;
   font-weight: 500;
-}
-
-/* Loading Animation */
-.loading {
-  text-align: center;
-  padding: 50px;
-  color: #a68b76;
-  font-size: 1.2rem;
-  grid-column: 1 / -1;
-}
-
-.loading::after {
-  content: "...";
-  animation: dots 1.5s steps(4, end) infinite;
-}
-
-@keyframes dots {
-  0%, 20% { content: ""; }
-  40% { content: "."; }
-  60% { content: ".."; }
-  80%, 100% { content: "..."; }
 }
