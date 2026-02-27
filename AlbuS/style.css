@@ -1,0 +1,324 @@
+/* ===== ENHANCED RETRO VINTAGE WITH BACKGROUND ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, #f9f3ea 0%, #eee5d9 40%, #e2d6c8 100%);
+  color: #5a4a3f;
+  font-family: 'Cormorant Garamond', serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Subtle vintage pattern overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(45deg, 
+      rgba(166, 139, 118, 0.02) 0px, 
+      rgba(166, 139, 118, 0.02) 2px, 
+      transparent 2px, 
+      transparent 8px),
+    radial-gradient(circle at 80% 20%, rgba(216, 196, 174, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(166, 139, 118, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative corners */
+body::after {
+  content: "✧ ✧ ✧";
+  position: fixed;
+  bottom: 15px;
+  right: 25px;
+  font-size: 1.2rem;
+  color: #a68b76;
+  opacity: 0.25;
+  letter-spacing: 6px;
+  transform: rotate(-3deg);
+  font-family: 'Cormorant Garamond', serif;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top corner decoration */
+.top-decoration {
+  position: fixed;
+  top: 15px;
+  left: 25px;
+  font-size: 1.2rem;
+  color: #a68b76;
+  opacity: 0.25;
+  letter-spacing: 6px;
+  transform: rotate(3deg);
+  font-family: 'Cormorant Garamond', serif;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vintage stamp effect in corners */
+.corner-decoration {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  width: 100px;
+  height: 100px;
+  border: 2px dashed rgba(166, 139, 118, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.corner-decoration::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: rgba(166, 139, 118, 0.2);
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 80px 20px 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #a68b76;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.03);
+  position: relative;
+  display: inline-block;
+}
+
+/* Subtle underline */
+.header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 20%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a68b76, transparent);
+  opacity: 0.3;
+}
+
+.header p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  letter-spacing: 6px;
+  color: #8c8175;
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+/* ===== GALLERY - MASONRY STYLE ===== */
+.gallery {
+  column-count: 4;
+  column-gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto 60px;
+  padding: 0 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.gallery img {
+  width: 100%;
+  margin-bottom: 25px;
+  border-radius: 18px;
+  border: 6px solid #f2eadf;
+  outline: 1px solid #d9cbb8;
+  box-shadow: 
+    0 8px 25px rgba(90, 74, 63, 0.15),
+    0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  break-inside: avoid;
+  display: block;
+  position: relative;
+  background: #f2eadf; /* matches border for loading */
+}
+
+.gallery img:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 15px 35px rgba(90, 74, 63, 0.2),
+    0 4px 8px rgba(0,0,0,0.1);
+  outline: 1px solid #a68b76;
+}
+
+/* ===== LIGHTBOX - SIMPLE & CLEAN ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(239, 231, 220, 0.97);
+  backdrop-filter: blur(8px);
+}
+
+.lightbox.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 18px;
+  border: 8px solid #f2eadf;
+  outline: 1px solid #d9cbb8;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1000;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  color: #a68b76;
+  font-size: 44px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(242, 234, 223, 0.5);
+}
+
+.lightbox-close:hover {
+  color: #5a4a3f;
+  background: rgba(242, 234, 223, 0.9);
+  transform: rotate(90deg);
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f2eadf;
+  padding: 10px 25px;
+  border-radius: 40px;
+  border: 1px solid #d9cbb8;
+  color: #5a4a3f;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  backdrop-filter: blur(4px);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 30px 20px 40px;
+  color: #8c8175;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(166, 139, 118, 0.15);
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer span {
+  color: #a68b76;
+  font-weight: 500;
+}
+
+/* ===== ADD THESE TO YOUR HTML (in body, after header) ===== */
+/* Just add these two lines after your header in index.html:
+   <div class="top-decoration">✦ ✦ ✦</div>
+   <div class="corner-decoration"></div>
+*/
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .gallery {
+    column-count: 3;
+  }
+  
+  .header h1 {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery {
+    column-count: 2;
+    column-gap: 20px;
+    padding: 0 20px;
+  }
+  
+  .gallery img {
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header p {
+    font-size: 1rem;
+    letter-spacing: 4px;
+  }
+  
+  .top-decoration, .corner-decoration, body::after {
+    opacity: 0.15;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery {
+    column-count: 1;
+  }
+  
+  .lightbox-content {
+    max-width: 92%;
+  }
+  
+  .lightbox-close {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+  }
+  
+  .lightbox-counter {
+    bottom: 20px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+}
