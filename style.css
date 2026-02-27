@@ -350,3 +350,20 @@ body::after {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Smooth image loading */
+.gallery img {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  display: none; /* Hidden until loaded */
+}
+
+.gallery img[data-loaded="true"] {
+  display: block !important;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
