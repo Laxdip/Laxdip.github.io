@@ -5,12 +5,6 @@
 
 ---
 
-![Status](https://img.shields.io/badge/Status-Live-8B6914?style=for-the-badge)
-![HTML](https://img.shields.io/badge/HTML-Single%20File-C2722A?style=for-the-badge)
-![No Dependencies](https://img.shields.io/badge/Dependencies-None-6B4F2A?style=for-the-badge)
-
----
-
 ## ✨ Features
 
 - **GitHub Pages ready** — auto-reads `images/manifest.json`, zero config needed
