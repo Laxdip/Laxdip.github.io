@@ -340,19 +340,19 @@
       to   { opacity: 1; }
     }
 
-    /* =====================================================
-       MASONRY GALLERY
-    ===================================================== */
-    .gallery {
-      column-count: 4;
-      column-gap: 16px;
-    }
-    .gallery.compact    { column-gap: 8px; }
-    .gallery.compact .photo-frame { margin-bottom: 8px; padding: 6px; }
-    .gallery.compact .photo-frame::before { inset: 3px 3px 3px 3px; }
-    .gallery.compact .photo-frame::after { inset: 5px 5px 5px 5px; }
+/* =====================================================
+   MASONRY GALLERY
+===================================================== */
+.gallery {
+  column-count: 4;
+  column-gap: 16px;
+}
+.gallery.compact { column-gap: 8px; }
+.gallery.compact .photo-frame { margin-bottom: 8px; padding: 6px; }
+.gallery.compact .photo-frame::before { inset: 3px; }
+.gallery.compact .photo-frame::after { inset: 5px; }
 
-   @media (max-width: 1200px) { 
+@media (max-width: 1200px) { 
   .gallery { column-count: 3; } 
 }
 
@@ -362,15 +362,14 @@
 
 @media (max-width: 440px) { 
   .gallery { column-count: 2; column-gap: 8px; }
-  .photo-frame { padding: 4px; } 
-  .photo-frame::before { inset: 2px 2px 2px 2px; }
-  .photo-frame::after { inset: 3px 3px 3px 3px; }
+  .photo-frame { padding: 4px !important; } 
+  .photo-frame::before { inset: 2px !important; }
+  .photo-frame::after { inset: 3px !important; }
 }
 
 @media (max-width: 360px) { 
   .gallery { column-count: 2; column-gap: 6px; }
-  .photo-frame { padding: 3px; }
-  .photo-img { filter: sepia(15%) contrast(1.04) brightness(0.92); }
+  .photo-frame { padding: 3px !important; }
 }
     /* =====================================================
        PHOTO FRAME
