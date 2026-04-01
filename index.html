@@ -61,7 +61,7 @@
     #gallery {
       background: repeating-linear-gradient(45deg, #b8a88a 0px, #b8a88a 1px, #c9bc9f 1px, #c9bc9f 8px) !important;
       padding: 24px 16px !important;
-      border-radius: 56px 56px 40px 40px !important;
+      border-radius: 0 !important;
       margin-top: 24px !important;
    }
     /* =====================================================
@@ -546,11 +546,10 @@
       align-items: center;
       justify-content: center;
       background: rgba(4, 2, 0, 0.96);
-      backdrop-filter: blur(18px) saturate(0.4);
-      -webkit-backdrop-filter: blur(18px) saturate(0.4);
+      backdrop-filter: blur(18px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.32s ease;
+      transition: opacity 0.2s ease;
     }
     #lightbox.open {
       opacity: 1;
@@ -645,21 +644,19 @@
       max-width: min(88vw, 1200px);
       max-height: 88vh;
       background: #ede3cc;
-      padding: 11px;
+      padding: 6px;
       border: 1px solid rgba(201,146,42,0.2);
-      box-shadow:
-        0 0 0 1px rgba(201,146,42,0.07),
-        0 50px 120px rgba(0,0,0,0.85),
-        0 0 80px rgba(201,146,42,0.06);
-      transform: scale(0.87) translateY(28px);
-      transition: transform 0.44s var(--ease-spring);
+      box-shadow: 0 50px 120px rgba(0,0,0,0.85);
+      transform: scale(0.94);
+      transition: transform 0.25s ease;
+      will-change: transform;
     }
-    #lightbox.open .lb-frame { transform: scale(1) translateY(0); }
+    #lightbox.open .lb-frame { transform: scale(1); }
 
     .lb-frame::before {
       content: '';
       position: absolute;
-      inset: 7px;
+      inset: 3px;
       border: 1px solid rgba(201,146,42,0.12);
       pointer-events: none;
       z-index: 1;
@@ -683,16 +680,16 @@
     #lb-img {
       display: block;
       max-width: 100%;
-      max-height: calc(88vh - 100px);
+      max-height: calc(88vh - 40px);
       object-fit: contain;
-      border-radius: 1px;
-      filter: sepia(10%) contrast(1.05) brightness(0.94) saturate(0.9);
-      transition: opacity 0.22s ease, transform 0.35s var(--ease-smooth);
+      filter: sepia(5%) contrast(1.02);
       cursor: zoom-in;
+      will-change: transform;
+      transition: transform 0.2s ease;
     }
     #lb-img.loading { opacity: 0; }
     #lightbox.zoomed #lb-img {
-      transform: scale(1.85);
+      transform: none;
       cursor: zoom-out;
     }
     #lightbox.zoomed .lb-frame { overflow: hidden; }
