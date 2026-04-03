@@ -3,10 +3,9 @@
 > *Stories Written By Nature*  
 > A dark-vintage, single-file photo gallery — built by **Prasad**
 
----
 ## 📸 Preview
-```bash
-https://laxdip.github.io/
+
+  **https://laxdip.github.io/**
 
 ---
 
