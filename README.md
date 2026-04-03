@@ -1,11 +1,11 @@
 # 🍂 Nature's Canvas  
 > A dark vintage, single file photo gallery - built by **Prasad**
-## 📸 Preview
+## Preview
   **https://laxdip.github.io/**
 
 ---
 
-## ✨ Features
+## Features
 
 - **GitHub Pages ready** — auto-reads `images/manifest.json`, zero config needed
 - **Dark vintage aesthetic** — deep charcoal + amber gold palette, grain texture, ambient glow
@@ -18,7 +18,7 @@
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 your-repo/
@@ -33,7 +33,7 @@ your-repo/
 
 ---
 
-## 🚀 Setup for GitHub Pages
+## Setup for GitHub Pages
 
 ### Step 1 — Add your photos to `images/`
 
@@ -63,7 +63,7 @@ Your site will be live at `https://your-username.github.io/repo-name/`
 
 ---
 
-## 💻 Running Locally
+## Running Locally
 
 Double-clicking `index.html` won't work (browser security blocks folder access).  
 Use a local server instead:
@@ -83,7 +83,7 @@ Locally, `manifest.json` is optional — the site auto-scans the `images/` folde
 
 ---
 
-## ⌨️ Keyboard Shortcuts
+## Keyboard Shortcuts
 
 | Key | Action |
 |-----|--------|
@@ -93,7 +93,7 @@ Locally, `manifest.json` is optional — the site auto-scans the `images/` folde
 
 ---
 
-## 📱 Responsive Breakpoints
+## Responsive Breakpoints
 
 | Screen | Columns |
 |--------|---------|
@@ -104,7 +104,7 @@ Locally, `manifest.json` is optional — the site auto-scans the `images/` folde
 
 ---
 
-## 🎨 Customisation
+## Customisation
 
 All colors are CSS variables at the top of `index.html`:
 
@@ -120,10 +120,10 @@ All colors are CSS variables at the top of `index.html`:
 
 ---
 
-## 📄 License
+## License
 
 MIT — free to use, modify, and share.
 
 ---
 
-*"In every walk with nature, one receives far more than he seeks." — John Muir*
+*"In every walk with nature, one receives far more than he seeks :) " — John Muir*
