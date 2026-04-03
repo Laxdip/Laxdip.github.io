@@ -1,10 +1,6 @@
-# 🍂 Nature's Canvas
-
-> *Stories Written By Nature*  
-> A dark-vintage, single-file photo gallery — built by **Prasad**
-
+# 🍂 Nature's Canvas  
+> A dark vintage, single file photo gallery - built by **Prasad**
 ## 📸 Preview
-
   **https://laxdip.github.io/**
 
 ---
