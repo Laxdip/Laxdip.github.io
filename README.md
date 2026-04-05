@@ -3,9 +3,9 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<div align="center" style="line-height: 0.9;">
-  <img src="screenshots/Canvas.png">
-  <img src="screenshots/Canvas2.png">
+<div align="center">
+  <img src="screenshots/Canvas.png"><br>
+  <img src="screenshots/Canvas2.png" style="margin-top: -8px;">
 </div>
 ---
 
