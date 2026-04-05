@@ -3,10 +3,10 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<div align="center">
-  <img src="screenshots/Canvas.png" style="margin: 0; padding: 0; display: block; line-height: 0;" />
-  <img src="screenshots/Canvas2.png" style="margin: 0; padding: 0; display: block; line-height: 0; margin-top: -15px;" />
-</div>
+<p align="center">
+  <img src="screenshots/Canvas.png"><br><br>
+  <img src="screenshots/Canvas2.png">
+</p>
 
 ---
 
