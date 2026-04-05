@@ -4,7 +4,7 @@
   **https://laxdip.github.io/**
 ## Screenshots
 <img src="screenshots/Canvas.png" width="480">
-<img src="screenshots/Canvas2.png" width="450">
+<img src="screenshots/Canvas2.png" width="480">
 
 ---
 
