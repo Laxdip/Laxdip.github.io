@@ -3,8 +3,10 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<img src="screenshots/Canvas.png" width="480">
-<img src="screenshots/Canvas2.png" width="480">
+<p align="center">
+  <img src="screenshots/Canvas.png" width="45%" />
+  <img src="screenshots/Canvas2.png" width="45%" />
+</p>
 
 ---
 
