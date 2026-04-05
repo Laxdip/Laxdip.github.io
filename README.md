@@ -3,12 +3,11 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-
-### Canvas
+###
 ![Canvas](screenshots/Canvas.png)
 
-### Preview
-![Preview](Canvas2.png)
+###
+![Preview](screenshots/Canvas2.png)
 
 ---
 
