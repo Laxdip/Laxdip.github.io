@@ -5,7 +5,7 @@
 ## Screenshots
 <div align="center">
   <img src="screenshots/Canvas.png" style="margin: 0; padding: 0; display: block; line-height: 0;" />
-  <img src="screenshots/Canvas2.png" style="margin: 0; padding: 0; display: block; line-height: 0; margin-top: -10px;" />
+  <img src="screenshots/Canvas2.png" style="margin: 0; padding: 0; display: block; line-height: 0; margin-top: -15px;" />
 </div>
 
 ---
