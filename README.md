@@ -3,11 +3,10 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<p align="center">
-  <img src="screenshots/Canvas.png"><br><br>
+<div align="center" style="line-height: 0.5;">
+  <img src="screenshots/Canvas.png">
   <img src="screenshots/Canvas2.png">
-</p>
-
+</div>
 ---
 
 ## Features
