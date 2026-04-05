@@ -4,8 +4,8 @@
   **https://laxdip.github.io/**
 ## Screenshots
 <p align="center">
-  <img src="screenshots/Canvas.png"><br>
-  <img src="screenshots/Canvas2.png" style="margin-top: -10px;">
+  <img src="screenshots/Canvas.png" width="500"><br>
+  <img src="screenshots/Canvas2.png" width="500" style="margin-top: -10px;">
 </p>
 ---
 
