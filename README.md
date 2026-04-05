@@ -2,6 +2,9 @@
 > A dark vintage, single file photo gallery - built by **Prasad**
 ## Preview
   **https://laxdip.github.io/**
+![Canvas](screenshots/canvas.png)
+
+![Preview](screenshots/canvas2.png)
 
 ---
 
