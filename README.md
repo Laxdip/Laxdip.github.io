@@ -3,14 +3,14 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<table cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td style="padding: 0; line-height: 0;"><img src="screenshots/Canvas.png"></td>
-  </tr>
-  <tr>
-    <td style="padding: 0; line-height: 0;"><img src="screenshots/Canvas2.png"></td>
-  </tr>
-</table>
+<div align="center">
+  <span style="display: block; line-height: 0; margin: 0; padding: 0;">
+    <img src="screenshots/Canvas.png" style="display: block; margin: 0; padding: 0;">
+  </span>
+  <span style="display: block; line-height: 0; margin: 0; padding: 0;">
+    <img src="screenshots/Canvas2.png" style="display: block; margin: 0; padding: 0;">
+  </span>
+</div>
 ---
 
 ## Features
