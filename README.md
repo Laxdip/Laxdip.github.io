@@ -4,8 +4,8 @@
   **https://laxdip.github.io/**
 ## Screenshots
 <div align="center">
-  <img src="Canvas.png" style="margin: 0; padding: 0; display: block;" />
-  <img src="Canvas2.png" style="margin: 0; padding: 0; display: block; margin-top: -4px;" />
+  <img src="screenshots/Canvas.png" style="margin: 0; padding: 0; display: block;" />
+  <img src="screenshots/Canvas2.png" style="margin: 0; padding: 0; display: block; margin-top: -6px;" />
 </div>
 
 ---
