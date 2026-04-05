@@ -3,7 +3,7 @@
 ## Preview
   **https://laxdip.github.io/**
 ## Screenshots
-<div align="center" style="line-height: 0.3;">
+<div align="center" style="line-height: 0.9;">
   <img src="screenshots/Canvas.png">
   <img src="screenshots/Canvas2.png">
 </div>
