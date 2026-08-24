@@ -44,24 +44,32 @@
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     
-    /* ═══════════════════════════════════════════════════
-       RESET
-    ═══════════════════════════════════════════════════ */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
+    /* ═══════════════════════════════════════════════
+       RESET + BASE
+    ═══════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
 
     body {
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,146,42,0.07) 0%, transparent 60%),
-        radial-gradient(rgba(200,170,110,0.07) 1px, transparent 1px);
-      background-size: 100% 100%, 28px 28px;
-      color: var(--cream);
-      font-family: var(--fb);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
       min-height: 100vh;
       overflow-x: hidden;
-      touch-action: pan-y;
+      padding: 0;
+      margin: 0;
     }
+
 
     /* ═══════════════════════════════════════════════════
        GRAIN OVERLAY
