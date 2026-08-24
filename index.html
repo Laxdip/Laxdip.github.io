@@ -21,10 +21,13 @@
       background: #0a0a0a;
       color: #e8e8e8;
       font-family: 'Inter', -apple-system, sans-serif;
-      padding: 0;
-      margin: 0;
       min-height: 100vh;
     }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
 
     /* ─── HEADER ─── */
     .header {
@@ -33,7 +36,7 @@
       z-index: 50;
       background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
       padding: 16px 32px;
       display: flex;
       align-items: center;
@@ -45,7 +48,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255,255,255,0.5);
     }
 
     .header h1 span {
@@ -55,7 +58,7 @@
 
     .header .year {
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.15);
+      color: rgba(255,255,255,0.15);
       font-weight: 300;
     }
 
@@ -74,15 +77,18 @@
       background: #111;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.04);
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
     }
 
     .card img {
@@ -98,7 +104,7 @@
       left: 0;
       right: 0;
       padding: 16px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -110,13 +116,13 @@
     .card .info .name {
       font-size: 0.7rem;
       font-weight: 400;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255,255,255,0.6);
       letter-spacing: 0.05em;
     }
 
     .card .info .num {
       font-size: 0.5rem;
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255,255,255,0.2);
       font-weight: 300;
     }
 
@@ -129,30 +135,30 @@
 
     .empty .icon {
       font-size: 2rem;
-      color: rgba(255, 255, 255, 0.05);
+      color: rgba(255,255,255,0.05);
       margin-bottom: 16px;
     }
 
     .empty h2 {
       font-weight: 300;
       font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255,255,255,0.2);
       letter-spacing: 0.1em;
     }
 
     .empty p {
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.08);
+      color: rgba(255,255,255,0.08);
       margin-top: 8px;
     }
 
     .empty code {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255,255,255,0.03);
       padding: 2px 10px;
       border-radius: 4px;
       font-size: 0.7rem;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.2);
     }
 
     /* ─── LOADING ─── */
@@ -160,12 +166,14 @@
       grid-column: 1 / -1;
       text-align: center;
       padding: 60px 20px;
-      color: rgba(255, 255, 255, 0.05);
+      color: rgba(255,255,255,0.05);
       font-size: 0.8rem;
       letter-spacing: 0.1em;
     }
 
-    /* ─── LIGHTBOX ─── */
+    /* ═══════════════════════════════════════════════════════
+       LIGHTBOX — AUTO-ADJUSTING FRAME
+    ═══════════════════════════════════════════════════════ */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -175,37 +183,42 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 40px;
+      padding: 80px 40px 100px;
     }
 
     .lightbox.open {
       display: flex;
     }
 
-    .lightbox .close-area {
+    /* ── Click backdrop to close ── */
+    .lightbox .backdrop {
       position: absolute;
       inset: 0;
       cursor: zoom-out;
     }
 
+    /* ── FRAME — auto-sizes to image ── */
     .lightbox .frame {
       position: relative;
       z-index: 2;
-      max-width: 90vw;
-      max-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      max-width: 90vw;
+      max-height: 80vh;
+      background: transparent;
     }
 
     .lightbox .frame img {
-      max-width: 100%;
+      display: block;
+      max-width: 90vw;
       max-height: 80vh;
       width: auto;
       height: auto;
       object-fit: contain;
       border-radius: 4px;
       transition: transform 0.3s ease;
+      background: transparent;
     }
 
     .lightbox .frame img.zoomed {
@@ -213,7 +226,7 @@
       cursor: zoom-out;
     }
 
-    /* ─── LIGHTBOX CONTROLS ─── */
+    /* ─── CONTROLS — OUTSIDE THE IMAGE ─── */
     .lb-controls {
       position: fixed;
       bottom: 32px;
@@ -224,10 +237,10 @@
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
-      background: rgba(20, 20, 20, 0.8);
+      background: rgba(20, 20, 20, 0.85);
       backdrop-filter: blur(16px);
       border-radius: 100px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.04);
     }
 
     .lb-btn {
@@ -236,7 +249,7 @@
       border: none;
       border-radius: 50%;
       background: transparent;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255,255,255,0.4);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -246,21 +259,22 @@
     }
 
     .lb-btn:hover {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255,255,255,0.04);
       color: #fff;
     }
 
     .lb-btn.close-btn:hover {
-      background: rgba(255, 50, 50, 0.08);
+      background: rgba(255,50,50,0.08);
       color: #ff6b6b;
     }
 
     .lb-divider {
       width: 1px;
       height: 24px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255,255,255,0.04);
     }
 
+    /* ─── NAVIGATION ─── */
     .lb-nav {
       position: fixed;
       top: 50%;
@@ -268,11 +282,11 @@
       z-index: 10;
       width: 44px;
       height: 44px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.04);
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0,0,0,0.4);
       backdrop-filter: blur(12px);
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255,255,255,0.2);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -282,7 +296,7 @@
     }
 
     .lb-nav:hover {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255,255,255,0.04);
       color: #fff;
     }
 
@@ -293,27 +307,28 @@
     #lbPrev { left: 24px; }
     #lbNext { right: 24px; }
 
-    .lb-counter {
-      position: fixed;
-      top: 24px;
-      right: 32px;
-      z-index: 10;
-      font-size: 0.55rem;
-      color: rgba(255, 255, 255, 0.06);
-      letter-spacing: 0.15em;
-      font-weight: 300;
-    }
-
-    .lb-filename {
+    /* ─── INFO ─── */
+    .lb-info {
       position: fixed;
       bottom: 88px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 20px;
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.06);
+      color: rgba(255,255,255,0.06);
       letter-spacing: 0.08em;
       font-weight: 300;
+    }
+
+    .lb-info .counter {
+      color: rgba(255,255,255,0.06);
+    }
+
+    .lb-info .filename {
+      color: rgba(255,255,255,0.04);
     }
 
     /* ─── SCROLL TOP ─── */
@@ -324,11 +339,11 @@
       z-index: 50;
       width: 38px;
       height: 38px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.04);
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       backdrop-filter: blur(12px);
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255,255,255,0.2);
       cursor: pointer;
       display: none;
       align-items: center;
@@ -342,36 +357,74 @@
     }
 
     #scrollTop:hover {
-      border-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255,255,255,0.08);
       color: #fff;
     }
-
-    /* ─── SCROLLBAR ─── */
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       .header { padding: 12px 16px; }
       .header h1 { font-size: 0.7rem; }
-      .gallery { padding: 16px 12px 40px; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-      .lightbox { padding: 16px; }
-      .lb-nav { width: 36px; height: 36px; font-size: 0.7rem; }
+      
+      .gallery { 
+        padding: 16px 12px 40px; 
+        gap: 10px; 
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+      }
+      
+      .lightbox { padding: 60px 16px 80px; }
+      
+      .lb-nav { 
+        width: 36px; 
+        height: 36px; 
+        font-size: 0.7rem; 
+      }
+      
       #lbPrev { left: 8px; }
       #lbNext { right: 8px; }
-      .lb-controls { padding: 6px 10px; bottom: 20px; gap: 4px; }
-      .lb-btn { width: 34px; height: 34px; font-size: 0.75rem; }
-      .lb-counter { top: 16px; right: 16px; font-size: 0.45rem; }
-      .lb-filename { bottom: 72px; font-size: 0.5rem; }
-      #scrollTop { bottom: 16px; right: 16px; width: 34px; height: 34px; font-size: 0.65rem; }
+      
+      .lb-controls { 
+        padding: 6px 10px; 
+        bottom: 16px; 
+        gap: 4px; 
+      }
+      
+      .lb-btn { 
+        width: 34px; 
+        height: 34px; 
+        font-size: 0.75rem; 
+      }
+      
+      .lb-info {
+        bottom: 68px;
+        font-size: 0.5rem;
+        gap: 12px;
+        flex-direction: column;
+        gap: 4px;
+      }
+      
+      #scrollTop { 
+        bottom: 16px; 
+        right: 16px; 
+        width: 34px; 
+        height: 34px; 
+        font-size: 0.65rem; 
+      }
     }
 
     @media (max-width: 480px) {
-      .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 12px 8px 32px; }
+      .gallery { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 6px; 
+        padding: 12px 8px 32px; 
+      }
+      
       .card { border-radius: 6px; }
       .card .info { padding: 10px; }
       .card .info .name { font-size: 0.55rem; }
+      
+      .lightbox { padding: 40px 8px 72px; }
+      .lightbox .frame img { max-width: 95vw; max-height: 70vh; }
     }
   </style>
 </head>
@@ -391,20 +444,29 @@
   <!-- ─── SCROLL TOP ─── -->
   <button id="scrollTop"><i class="fa-regular fa-arrow-up"></i></button>
 
-  <!-- ─── LIGHTBOX ─── -->
+  <!-- ═══════════════════════════════════════════════════════
+       LIGHTBOX — AUTO-ADJUSTING
+  ═══════════════════════════════════════════════════════ -->
   <div class="lightbox" id="lightbox">
-    <div class="close-area" id="closeArea"></div>
+    <!-- Backdrop to close -->
+    <div class="backdrop" id="backdrop"></div>
 
+    <!-- Navigation -->
     <button class="lb-nav hidden" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="lb-nav hidden" id="lbNext"><i class="fa-solid fa-chevron-right"></i></button>
 
+    <!-- Frame — auto-sizes to image -->
     <div class="frame" id="frame">
       <img id="lbImg" src="" alt="" />
     </div>
 
-    <div class="lb-counter" id="lbCounter"></div>
-    <div class="lb-filename" id="lbFilename"></div>
+    <!-- Info below image -->
+    <div class="lb-info" id="lbInfo">
+      <span class="filename" id="lbFilename"></span>
+      <span class="counter" id="lbCounter"></span>
+    </div>
 
+    <!-- Controls — always visible, outside image -->
     <div class="lb-controls">
       <button class="lb-btn" id="lbZoom"><i class="fa-regular fa-magnifying-glass-plus"></i></button>
       <span class="lb-divider"></span>
@@ -431,7 +493,7 @@
       const gallery = document.getElementById('gallery');
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lbImg');
-      const closeArea = document.getElementById('closeArea');
+      const backdrop = document.getElementById('backdrop');
       const lbClose = document.getElementById('lbClose');
       const lbZoom = document.getElementById('lbZoom');
       const lbDownload = document.getElementById('lbDownload');
@@ -543,9 +605,17 @@
         currentIndex = index;
 
         const data = images[index];
+        
+        // Reset zoom state
+        lbImg.classList.remove('zoomed');
+        const zoomIcon = lbZoom.querySelector('i');
+        zoomIcon.className = 'fa-regular fa-magnifying-glass-plus';
+        
+        // Set image
         lbImg.src = data.src;
         lbImg.alt = cleanName(data.name);
-        lbImg.classList.remove('zoomed');
+        
+        // Update info
         lbFilename.textContent = data.name;
         lbDownload.href = data.src;
         lbDownload.setAttribute('download', data.name);
@@ -601,7 +671,7 @@
 
       // ─── LIGHTBOX EVENTS ────────────────────────
       lbClose.addEventListener('click', closeLightbox);
-      closeArea.addEventListener('click', closeLightbox);
+      backdrop.addEventListener('click', closeLightbox);
 
       lbPrev.addEventListener('click', () => navigate(-1));
       lbNext.addEventListener('click', () => navigate(1));
