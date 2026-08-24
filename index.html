@@ -2,315 +2,210 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>NATURE — Immersive Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-    /* ═══════════════════════════════════════════════════════
-       DESIGN SYSTEM — Ultra Minimal + Bold
-    ═══════════════════════════════════════════════════════ */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    :root {
-      --bg: #050505;
-      --bg-card: #0a0a0a;
-      --bg-hover: #111111;
-      --text: #f5f5f5;
-      --text-dim: #555555;
-      --accent: #6c5ce7;
-      --accent-glow: rgba(108, 92, 231, 0.08);
-      --border: rgba(255, 255, 255, 0.04);
-      --border-hover: rgba(108, 92, 231, 0.15);
-      --shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
-      --font: 'Outfit', -apple-system, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      padding: 0;
+      margin: 0;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       SCROLLBAR
-    ═══════════════════════════════════════════════════════ */
-    ::-webkit-scrollbar {
-      width: 2px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 10px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       HEADER — Ultra Minimal
-    ═══════════════════════════════════════════════════════ */
+    /* ─── HEADER ─── */
     .header {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 18px 32px;
-      background: rgba(5, 5, 5, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      z-index: 50;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 16px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .header .brand {
+    .header h1 {
       font-weight: 300;
-      font-size: 0.85rem;
-      letter-spacing: 0.3em;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-dim);
+      color: rgba(255, 255, 255, 0.5);
     }
 
-    .header .brand span {
-      color: var(--text);
-      font-weight: 600;
+    .header h1 span {
+      color: #fff;
+      font-weight: 500;
     }
 
-    .header .brand i {
-      color: var(--accent);
-      margin-right: 8px;
+    .header .year {
       font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.15);
+      font-weight: 300;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       MAIN — Full Bleed Gallery
-    ═══════════════════════════════════════════════════════ */
-    .main {
-      padding-top: 80px;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-bottom: 40px;
-    }
-
-    /* ── Gallery Grid ── */
+    /* ─── GALLERY ─── */
     .gallery {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    /* ── Art Card ── */
-    .art-card {
+    .card {
       position: relative;
-      background: var(--bg-card);
+      background: #111;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 200px;
+      transition: all 0.3s ease;
     }
 
-    .art-card:hover {
-      border-color: var(--border-hover);
+    .card:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow);
-      z-index: 10;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     }
 
-    .art-card img {
+    .card img {
       display: block;
       width: 100%;
       height: auto;
-      transition: all 0.5s ease;
-      background: var(--bg-card);
+      background: #111;
     }
 
-    .art-card:hover img {
-      filter: brightness(0.85) saturate(1.05);
-      transform: scale(1.02);
-    }
-
-    /* ── Card Overlay ── */
-    .art-card .overlay {
+    .card .info {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 20px 18px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 16px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
       opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.35s ease;
+      transition: opacity 0.3s ease;
     }
 
-    .art-card:hover .overlay {
+    .card:hover .info {
       opacity: 1;
-      transform: translateY(0);
     }
 
-    .art-card .overlay .title {
+    .card .info .name {
       font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
+      font-weight: 400;
       color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.05em;
     }
 
-    .art-card .overlay .index {
+    .card .info .num {
       font-size: 0.5rem;
-      color: rgba(255, 255, 255, 0.15);
-      font-weight: 200;
-      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.2);
+      font-weight: 300;
     }
 
-    /* ── Placeholder ── */
-    .placeholder {
-      background: var(--bg-card);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-dim);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      animation: pulse 1.5s ease-in-out infinite;
-      min-height: 200px;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
-    }
-
-    /* ── Empty State ── */
+    /* ─── EMPTY ─── */
     .empty {
       grid-column: 1 / -1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 20px;
       text-align: center;
-      gap: 16px;
+      padding: 80px 20px;
     }
 
     .empty .icon {
-      width: 60px;
-      height: 60px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      color: var(--text-dim);
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.05);
+      margin-bottom: 16px;
     }
 
     .empty h2 {
       font-weight: 300;
       font-size: 1.2rem;
-      color: var(--text-dim);
+      color: rgba(255, 255, 255, 0.2);
       letter-spacing: 0.1em;
     }
 
     .empty p {
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      max-width: 360px;
-      line-height: 1.8;
-      font-weight: 200;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.08);
+      margin-top: 8px;
     }
 
     .empty code {
-      background: var(--bg-card);
+      background: rgba(255, 255, 255, 0.03);
       padding: 2px 10px;
       border-radius: 4px;
-      font-size: 0.65rem;
-      color: var(--accent);
-      border: 1px solid var(--border);
-      font-family: 'Monaco', monospace;
+      font-size: 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.2);
     }
 
-    /* ═══════════════════════════════════════════════════════
-       LIGHTBOX — Immersive Full Screen
-    ═══════════════════════════════════════════════════════ */
+    /* ─── LOADING ─── */
+    .loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255, 255, 255, 0.05);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── LIGHTBOX ─── */
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.97);
-      backdrop-filter: blur(60px);
-      display: flex;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(40px);
+      display: none;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
       padding: 40px;
     }
 
     .lightbox.open {
-      opacity: 1;
-      pointer-events: all;
+      display: flex;
     }
 
-    .lightbox .backdrop {
+    .lightbox .close-area {
       position: absolute;
       inset: 0;
       cursor: zoom-out;
     }
 
-    /* ── Frame ── */
     .lightbox .frame {
       position: relative;
       z-index: 2;
       max-width: 90vw;
       max-height: 85vh;
-      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: scale(0.92);
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .lightbox.open .frame {
-      transform: scale(1);
     }
 
     .lightbox .frame img {
-      display: block;
       max-width: 100%;
       max-height: 80vh;
       width: auto;
       height: auto;
       object-fit: contain;
-      transition: transform 0.35s ease;
-      touch-action: pinch-zoom;
       border-radius: 4px;
+      transition: transform 0.3s ease;
     }
 
     .lightbox .frame img.zoomed {
@@ -318,7 +213,7 @@
       cursor: zoom-out;
     }
 
-    /* ── Controls — ALWAYS VISIBLE ── */
+    /* ─── LIGHTBOX CONTROLS ─── */
     .lb-controls {
       position: fixed;
       bottom: 32px;
@@ -327,18 +222,12 @@
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       padding: 8px 12px;
-      background: rgba(10, 10, 10, 0.7);
+      background: rgba(20, 20, 20, 0.8);
       backdrop-filter: blur(16px);
       border-radius: 100px;
       border: 1px solid rgba(255, 255, 255, 0.04);
-      opacity: 0;
-      transition: opacity 0.4s ease 0.3s;
-    }
-
-    .lightbox.open .lb-controls {
-      opacity: 1;
     }
 
     .lb-btn {
@@ -352,24 +241,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.25s ease;
       font-size: 0.9rem;
+      transition: all 0.2s ease;
     }
 
     .lb-btn:hover {
       background: rgba(255, 255, 255, 0.04);
-      color: #ffffff;
-      transform: scale(1.05);
+      color: #fff;
     }
 
-    .lb-btn.close:hover {
+    .lb-btn.close-btn:hover {
       background: rgba(255, 50, 50, 0.08);
       color: #ff6b6b;
-    }
-
-    .lb-btn.download:hover {
-      background: rgba(108, 92, 231, 0.08);
-      color: var(--accent);
     }
 
     .lb-divider {
@@ -378,343 +261,177 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
-    /* ── Navigation ── */
     .lb-nav {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 5;
+      z-index: 10;
       width: 44px;
       height: 44px;
       border: 1px solid rgba(255, 255, 255, 0.04);
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(12px);
       color: rgba(255, 255, 255, 0.2);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
       font-size: 0.85rem;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .lightbox.open .lb-nav {
-      opacity: 1;
-      pointer-events: all;
+      transition: all 0.2s ease;
     }
 
     .lb-nav:hover {
       background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.06);
-      color: #ffffff;
-      transform: translateY(-50%) scale(1.05);
+      color: #fff;
     }
 
     .lb-nav.hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
+      display: none;
     }
 
     #lbPrev { left: 24px; }
     #lbNext { right: 24px; }
 
-    /* ── Counter ── */
     .lb-counter {
       position: fixed;
       top: 24px;
-      right: 24px;
-      z-index: 5;
+      right: 32px;
+      z-index: 10;
       font-size: 0.55rem;
-      color: rgba(255, 255, 255, 0.08);
-      letter-spacing: 0.2em;
-      font-weight: 200;
-      opacity: 0;
-      transition: opacity 0.4s ease 0.5s;
+      color: rgba(255, 255, 255, 0.06);
+      letter-spacing: 0.15em;
+      font-weight: 300;
     }
 
-    .lightbox.open .lb-counter {
-      opacity: 1;
-    }
-
-    /* ── Filename ── */
     .lb-filename {
       position: fixed;
-      bottom: 90px;
+      bottom: 88px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 5;
+      z-index: 10;
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.08);
-      letter-spacing: 0.1em;
-      font-weight: 200;
-      opacity: 0;
-      transition: opacity 0.4s ease 0.5s;
+      color: rgba(255, 255, 255, 0.06);
+      letter-spacing: 0.08em;
+      font-weight: 300;
     }
 
-    .lightbox.open .lb-filename {
-      opacity: 1;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       SCROLL TOP
-    ═══════════════════════════════════════════════════════ */
+    /* ─── SCROLL TOP ─── */
     #scrollTop {
       position: fixed;
       bottom: 24px;
       right: 24px;
       z-index: 50;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border);
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
       border-radius: 50%;
-      background: rgba(5, 5, 5, 0.8);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(12px);
-      color: var(--text-dim);
+      color: rgba(255, 255, 255, 0.2);
       cursor: pointer;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
       font-size: 0.75rem;
+      transition: all 0.2s ease;
     }
 
     #scrollTop.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
+      display: flex;
     }
 
     #scrollTop:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #fff;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 12px;
-      }
-    }
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
 
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      .header {
-        padding: 14px 16px;
-      }
-      
-      .header .brand {
-        font-size: 0.7rem;
-      }
-      
-      .main {
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 72px;
-      }
-      
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 8px;
-      }
-      
-      .art-card {
-        border-radius: 8px;
-        min-height: 140px;
-      }
-      
-      .lightbox {
-        padding: 16px;
-      }
-      
-      .lightbox .frame {
-        max-width: 98vw;
-        max-height: 82vh;
-      }
-      
-      .lb-nav {
-        width: 36px;
-        height: 36px;
-        font-size: 0.7rem;
-      }
-      
+      .header { padding: 12px 16px; }
+      .header h1 { font-size: 0.7rem; }
+      .gallery { padding: 16px 12px 40px; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .lightbox { padding: 16px; }
+      .lb-nav { width: 36px; height: 36px; font-size: 0.7rem; }
       #lbPrev { left: 8px; }
       #lbNext { right: 8px; }
-      
-      .lb-controls {
-        padding: 6px 10px;
-        bottom: 20px;
-        gap: 4px;
-      }
-      
-      .lb-btn {
-        width: 34px;
-        height: 34px;
-        font-size: 0.75rem;
-      }
-      
-      .lb-counter {
-        top: 16px;
-        right: 16px;
-        font-size: 0.45rem;
-      }
-      
-      .lb-filename {
-        bottom: 72px;
-        font-size: 0.5rem;
-      }
-      
-      #scrollTop {
-        bottom: 16px;
-        right: 16px;
-        width: 34px;
-        height: 34px;
-        font-size: 0.65rem;
-      }
+      .lb-controls { padding: 6px 10px; bottom: 20px; gap: 4px; }
+      .lb-btn { width: 34px; height: 34px; font-size: 0.75rem; }
+      .lb-counter { top: 16px; right: 16px; font-size: 0.45rem; }
+      .lb-filename { bottom: 72px; font-size: 0.5rem; }
+      #scrollTop { bottom: 16px; right: 16px; width: 34px; height: 34px; font-size: 0.65rem; }
     }
 
     @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-      }
-      
-      .art-card {
-        border-radius: 6px;
-        min-height: 100px;
-      }
-      
-      .art-card .overlay {
-        padding: 12px;
-      }
-      
-      .art-card .overlay .title {
-        font-size: 0.55rem;
-      }
-      
-      .lb-controls {
-        bottom: 14px;
-        padding: 4px 8px;
-      }
-      
-      .lb-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 0.65rem;
-      }
-      
-      .lb-divider {
-        height: 16px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .gallery {
-        gap: 4px;
-      }
-      
-      .art-card {
-        border-radius: 4px;
-      }
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 12px 8px 32px; }
+      .card { border-radius: 6px; }
+      .card .info { padding: 10px; }
+      .card .info .name { font-size: 0.55rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════
-       HEADER
-  ═══════════════════════════════════════════════════════ -->
+  <!-- ─── HEADER ─── -->
   <header class="header">
-    <div class="brand">
-      <i class="fa-regular fa-compass"></i>
-      <span>NATURE</span> ARCHIVE
-    </div>
-    <div class="brand" style="font-size:0.6rem;color:var(--text-dim);">
-      <i class="fa-regular fa-circle" style="color:var(--accent);font-size:0.4rem;"></i>
-      <span id="yearDisplay"></span>
-    </div>
+    <h1><span>⟡</span> GALLERY</h1>
+    <span class="year" id="year"></span>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════
-       MAIN GALLERY
-  ═══════════════════════════════════════════════════════ -->
-  <main class="main">
-    <div class="gallery" id="gallery"></div>
-  </main>
+  <!-- ─── GALLERY ─── -->
+  <div class="gallery" id="gallery">
+    <div class="loading">loading photographs...</div>
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       SCROLL TOP
-  ═══════════════════════════════════════════════════════ -->
-  <button id="scrollTop" aria-label="Back to top">
-    <i class="fa-regular fa-arrow-up"></i>
-  </button>
+  <!-- ─── SCROLL TOP ─── -->
+  <button id="scrollTop"><i class="fa-regular fa-arrow-up"></i></button>
 
-  <!-- ═══════════════════════════════════════════════════════
-       LIGHTBOX
-  ═══════════════════════════════════════════════════════ -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="backdrop" id="lbBackdrop"></div>
+  <!-- ─── LIGHTBOX ─── -->
+  <div class="lightbox" id="lightbox">
+    <div class="close-area" id="closeArea"></div>
 
-    <button class="lb-nav hidden" id="lbPrev" aria-label="Previous">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="lb-nav hidden" id="lbNext" aria-label="Next">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
+    <button class="lb-nav hidden" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="lb-nav hidden" id="lbNext"><i class="fa-solid fa-chevron-right"></i></button>
 
-    <div class="frame" id="lbFrame">
-      <img id="lbImg" src="" alt="" loading="eager" />
+    <div class="frame" id="frame">
+      <img id="lbImg" src="" alt="" />
     </div>
 
     <div class="lb-counter" id="lbCounter"></div>
     <div class="lb-filename" id="lbFilename"></div>
 
     <div class="lb-controls">
-      <button class="lb-btn" id="lbZoom" title="Toggle zoom" aria-label="Toggle zoom">
-        <i class="fa-regular fa-magnifying-glass-plus"></i>
-      </button>
+      <button class="lb-btn" id="lbZoom"><i class="fa-regular fa-magnifying-glass-plus"></i></button>
       <span class="lb-divider"></span>
-      <a class="lb-btn download" id="lbDownload" title="Download" aria-label="Download" download>
-        <i class="fa-regular fa-download"></i>
-      </a>
+      <a class="lb-btn" id="lbDownload" download><i class="fa-regular fa-download"></i></a>
       <span class="lb-divider"></span>
-      <button class="lb-btn close" id="lbClose" title="Close" aria-label="Close">
-        <i class="fa-regular fa-xmark"></i>
-      </button>
+      <button class="lb-btn close-btn" id="lbClose"><i class="fa-regular fa-xmark"></i></button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       JAVASCRIPT
-  ═══════════════════════════════════════════════════════ -->
   <script>
-    (() => {
+    (function() {
       'use strict';
 
-      // ─── CONFIG ──────────────────────────────────────
-      const CONFIG = {
-        path: 'images/',
-        manifest: 'images/manifest.json',
-        formats: ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'],
-      };
+      // ─── CONFIG ──────────────────────────────────
+      const PATH = 'images/';
+      const MANIFEST = 'images/manifest.json';
+      const FORMATS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'];
 
-      // ─── STATE ──────────────────────────────────────
+      // ─── STATE ──────────────────────────────────
       let images = [];
       let currentIndex = -1;
 
-      // ─── DOM REFS ──────────────────────────────────
+      // ─── DOM ─────────────────────────────────────
       const gallery = document.getElementById('gallery');
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lbImg');
-      const lbBackdrop = document.getElementById('lbBackdrop');
+      const closeArea = document.getElementById('closeArea');
       const lbClose = document.getElementById('lbClose');
       const lbZoom = document.getElementById('lbZoom');
       const lbDownload = document.getElementById('lbDownload');
@@ -722,52 +439,54 @@
       const lbNext = document.getElementById('lbNext');
       const lbFilename = document.getElementById('lbFilename');
       const lbCounter = document.getElementById('lbCounter');
-      const scrollTopBtn = document.getElementById('scrollTop');
-      const yearDisplay = document.getElementById('yearDisplay');
+      const scrollTop = document.getElementById('scrollTop');
+      const yearEl = document.getElementById('year');
 
-      // ─── YEAR ──────────────────────────────────────
-      yearDisplay.textContent = new Date().getFullYear();
+      // ─── YEAR ────────────────────────────────────
+      yearEl.textContent = new Date().getFullYear();
 
-      // ─── HELPERS ────────────────────────────────────
-      const prettyName = (name) => name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+      // ─── HELPERS ────────────────────────────────
+      function cleanName(name) {
+        return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+      }
 
-      // ─── DISCOVER IMAGES ──────────────────────────
-      async function discoverImages() {
+      // ─── LOAD IMAGES ────────────────────────────
+      async function loadImages() {
         try {
-          const res = await fetch(CONFIG.manifest);
+          const res = await fetch(MANIFEST);
           if (res.ok) {
             const list = await res.json();
             if (Array.isArray(list) && list.length) {
-              images = list.map((f) => ({ src: CONFIG.path + f, name: f }));
-              renderGallery();
+              images = list.map(f => ({ src: PATH + f, name: f }));
+              render();
               return;
             }
           }
         } catch (_) {}
 
         try {
-          const res = await fetch(CONFIG.path);
+          const res = await fetch(PATH);
           if (res.ok) {
             const html = await res.text();
             const doc = new DOMParser().parseFromString(html, 'text/html');
             const names = [...doc.querySelectorAll('a[href]')]
-              .map((a) => a.getAttribute('href'))
-              .filter((h) => CONFIG.formats.some((ext) => h.toLowerCase().endsWith(ext)))
-              .map((h) => h.split('/').pop());
+              .map(a => a.getAttribute('href'))
+              .filter(h => FORMATS.some(ext => h.toLowerCase().endsWith(ext)))
+              .map(h => h.split('/').pop());
             if (names.length) {
-              images = names.map((f) => ({ src: CONFIG.path + f, name: f }));
-              renderGallery();
+              images = names.map(f => ({ src: PATH + f, name: f }));
+              render();
               return;
             }
           }
         } catch (_) {}
 
         images = [];
-        renderGallery();
+        render();
       }
 
-      // ─── RENDER GALLERY ────────────────────────────
-      function renderGallery() {
+      // ─── RENDER ──────────────────────────────────
+      function render() {
         gallery.innerHTML = '';
 
         if (!images.length) {
@@ -775,101 +494,93 @@
             <div class="empty">
               <div class="icon"><i class="fa-regular fa-image"></i></div>
               <h2>No images found</h2>
-              <p>Add images to <code>/images</code> and create<br />
-                 <code>images/manifest.json</code> listing them.</p>
+              <p>Add images to <code>/images</code> and create<br /><code>images/manifest.json</code></p>
             </div>
           `;
           return;
         }
 
-        images.forEach((data, idx) => {
+        images.forEach((data, i) => {
           const card = document.createElement('div');
-          card.className = 'art-card';
-          card.dataset.index = idx;
-          card.setAttribute('role', 'listitem');
-          card.setAttribute('tabindex', '0');
+          card.className = 'card';
 
           const img = document.createElement('img');
-          img.alt = prettyName(data.name);
-          img.loading = 'lazy';
-          img.decoding = 'async';
           img.src = data.src;
+          img.alt = cleanName(data.name);
+          img.loading = 'lazy';
 
-          const overlay = document.createElement('div');
-          overlay.className = 'overlay';
-          const title = document.createElement('div');
-          title.className = 'title';
-          title.textContent = prettyName(data.name);
-          const index = document.createElement('div');
-          index.className = 'index';
-          index.textContent = `#${idx + 1}`;
-          overlay.appendChild(title);
-          overlay.appendChild(index);
+          const info = document.createElement('div');
+          info.className = 'info';
+          info.innerHTML = `
+            <div class="name">${cleanName(data.name)}</div>
+            <div class="num">#${i + 1}</div>
+          `;
 
           card.appendChild(img);
-          card.appendChild(overlay);
+          card.appendChild(info);
           gallery.appendChild(card);
 
-          img.addEventListener('error', () => {
-            images[idx] = null;
-            card.remove();
-          });
-
-          card.addEventListener('click', () => openLightbox(idx));
+          card.addEventListener('click', () => openLightbox(i));
           card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              openLightbox(idx);
+              openLightbox(i);
             }
+          });
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('role', 'button');
+
+          img.addEventListener('error', () => {
+            images[i] = null;
+            card.remove();
           });
         });
       }
 
-      // ─── LIGHTBOX ──────────────────────────────────
-      function openLightbox(idx) {
-        if (!images[idx]) return;
-        currentIndex = idx;
+      // ─── LIGHTBOX ────────────────────────────────
+      function openLightbox(index) {
+        if (!images[index]) return;
+        currentIndex = index;
 
-        const data = images[idx];
+        const data = images[index];
         lbImg.src = data.src;
-        lbImg.alt = prettyName(data.name);
+        lbImg.alt = cleanName(data.name);
         lbImg.classList.remove('zoomed');
         lbFilename.textContent = data.name;
         lbDownload.href = data.src;
         lbDownload.setAttribute('download', data.name);
 
         updateCounter();
+        updateNav();
 
         lightbox.classList.add('open');
-        lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-
-        updateNavButtons();
         setTimeout(() => lbClose.focus(), 100);
       }
 
       function closeLightbox() {
         lightbox.classList.remove('open');
-        lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         setTimeout(() => {
-          if (!lightbox.classList.contains('open')) lbImg.src = '';
+          if (!lightbox.classList.contains('open')) {
+            lbImg.src = '';
+          }
         }, 400);
         currentIndex = -1;
       }
 
-      function navigateLightbox(dir) {
+      function navigate(dir) {
         let next = currentIndex + dir;
         const max = images.length - 1;
         if (next < 0) next = max;
         if (next > max) next = 0;
 
-        let attempts = 0;
-        while (!images[next] && attempts < images.length) {
+        let tries = 0;
+        while (!images[next] && tries < images.length) {
           next += dir;
           if (next < 0) next = max;
           if (next > max) next = 0;
-          attempts++;
+          tries++;
         }
 
         if (images[next]) {
@@ -879,24 +590,21 @@
 
       function updateCounter() {
         const total = images.filter(Boolean).length;
-        if (total <= 1) {
-          lbCounter.textContent = '';
-        } else {
-          lbCounter.textContent = `${currentIndex + 1} / ${total}`;
-        }
+        lbCounter.textContent = total > 1 ? `${currentIndex + 1} / ${total}` : '';
       }
 
-      function updateNavButtons() {
+      function updateNav() {
         const total = images.filter(Boolean).length;
         lbPrev.classList.toggle('hidden', total <= 1);
         lbNext.classList.toggle('hidden', total <= 1);
       }
 
-      // ─── LIGHTBOX EVENTS ──────────────────────────
+      // ─── LIGHTBOX EVENTS ────────────────────────
       lbClose.addEventListener('click', closeLightbox);
-      lbBackdrop.addEventListener('click', closeLightbox);
-      lbPrev.addEventListener('click', () => navigateLightbox(-1));
-      lbNext.addEventListener('click', () => navigateLightbox(1));
+      closeArea.addEventListener('click', closeLightbox);
+
+      lbPrev.addEventListener('click', () => navigate(-1));
+      lbNext.addEventListener('click', () => navigate(1));
 
       lbZoom.addEventListener('click', () => {
         lbImg.classList.toggle('zoomed');
@@ -910,49 +618,40 @@
 
       lbImg.addEventListener('dblclick', () => lbZoom.click());
 
+      // ─── KEYBOARD ────────────────────────────────
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeLightbox();
-        }
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          navigateLightbox(-1);
-        }
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          navigateLightbox(1);
-        }
+        if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1); }
       });
 
-      // ─── SWIPE ─────────────────────────────────────
-      let touchStartX = 0;
-      let touchStartY = 0;
+      // ─── SWIPE ────────────────────────────────────
+      let startX = 0, startY = 0;
       lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
       }, { passive: true });
 
       lightbox.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-          navigateLightbox(dx < 0 ? 1 : -1);
+          navigate(dx < 0 ? 1 : -1);
         }
       }, { passive: true });
 
       // ─── SCROLL TOP ──────────────────────────────
       window.addEventListener('scroll', () => {
-        scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+        scrollTop.classList.toggle('show', window.scrollY > 400);
       }, { passive: true });
 
-      scrollTopBtn.addEventListener('click', () => {
+      scrollTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // ─── INIT ──────────────────────────────────────
-      discoverImages();
+      // ─── INIT ─────────────────────────────────────
+      loadImages();
 
     })();
   </script>
