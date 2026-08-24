@@ -82,39 +82,63 @@
       background-size:200px 200px;
     }
 
-    /* ═══════════════════════════════════════════════════
-       AMBIENT ORBS
-    ═══════════════════════════════════════════════════ */
-    .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-    .orb{
-      position:absolute;border-radius:50%;
-      filter:blur(130px);
-      will-change:transform;
-      animation:orbDrift 30s ease-in-out infinite alternate;
+    /* ═══════════════════════════════════════════════
+       AMBIENT BACKGROUND
+    ═══════════════════════════════════════════════ */
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
-    .orb:nth-child(1){
-      width:800px;height:800px;top:-280px;left:-180px;
-      background:radial-gradient(circle,rgba(201,146,42,0.22),transparent 65%);
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.4;
+      will-change: transform;
+      animation: floatOrb 20s ease-in-out infinite alternate;
     }
-    .orb:nth-child(2){
-      width:550px;height:550px;bottom:-120px;right:-120px;
-      background:radial-gradient(circle,rgba(122,80,16,0.18),transparent 65%);
-      animation-duration:22s;animation-delay:-9s;animation-direction:alternate-reverse;
+
+    .bg-orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(212, 168, 75, 0.12), transparent 70%);
     }
-    .orb:nth-child(3){
-      width:400px;height:400px;top:42%;left:48%;
-      background:radial-gradient(circle,rgba(232,184,75,0.1),transparent 65%);
-      animation-duration:38s;animation-delay:-18s;
+
+    .bg-orb:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -50px;
+      background: radial-gradient(circle, rgba(120, 80, 30, 0.15), transparent 70%);
+      animation-duration: 25s;
+      animation-delay: -5s;
     }
-    .orb:nth-child(4){
-      width:250px;height:250px;top:20%;right:18%;
-      background:radial-gradient(circle,rgba(245,204,106,0.08),transparent 65%);
-      animation-duration:26s;animation-delay:-5s;animation-direction:alternate-reverse;
+
+    .bg-orb:nth-child(3) {
+      width: 300px;
+      height: 300px;
+      top: 40%;
+      left: 50%;
+      background: radial-gradient(circle, rgba(212, 168, 75, 0.06), transparent 70%);
+      animation-duration: 30s;
+      animation-delay: -10s;
     }
-    @keyframes orbDrift{
-      from{transform:translate(0,0) scale(1);}
-      to  {transform:translate(38px,28px) scale(1.1);}
+
+    @keyframes floatOrb {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(40px, -30px) scale(1.1);
+      }
     }
+
 
     /* ═══════════════════════════════════════════════════
        PAGE
