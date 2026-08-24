@@ -3,517 +3,247 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Nature's Canvas</title>
+  <title>WILD — Visual Archive</title>
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Font Awesome 6 (Solid + Regular) -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Google Material Symbols for additional icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <style>
     /* ═══════════════════════════════════════════════════════
-       ROOT — Premium Art Gallery Theme
+       DESIGN SYSTEM — Brutalist + Neon
     ═══════════════════════════════════════════════════════ */
-    :root {
-      /* Primary palette — warm, sophisticated */
-      --bg-deep: #0c0a08;
-      --bg-surface: #14110e;
-      --bg-elevated: #1c1814;
-      --bg-card: #1f1a15;
-      
-      --gold-subtle: #8b7a5a;
-      --gold-mid: #c4a86a;
-      --gold-bright: #e8d5a3;
-      --gold-glow: rgba(196, 168, 106, 0.12);
-      
-      --text-cream: #f0ebe0;
-      --text-warm: #d4c9b8;
-      --text-muted: #8a7e6a;
-      --text-dim: #5a5042;
-      
-      --border-light: rgba(196, 168, 106, 0.08);
-      --border-glow: rgba(196, 168, 106, 0.15);
-      
-      /* Typography */
-      --font-display: 'Cormorant Garamond', 'Georgia', serif;
-      --font-body: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
-      
-      /* Spacing */
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 24px;
-      --space-xl: 40px;
-      --space-2xl: 64px;
-      
-      /* Transitions */
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-      --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       RESET & BASE
-    ═══════════════════════════════════════════════════════ */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #161616;
+      --bg-hover: #1e1e1e;
+      
+      --neon-green: #00ff41;
+      --neon-blue: #00d4ff;
+      --neon-purple: #b026ff;
+      --neon-pink: #ff2d75;
+      --neon-orange: #ff6b00;
+      
+      --text-primary: #f0f0f0;
+      --text-secondary: #888888;
+      --text-muted: #444444;
+      
+      --border-color: #222222;
+      --border-hover: #333333;
+      
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      
+      --shadow-neon: 0 0 30px rgba(0, 255, 65, 0.05);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.8);
     }
 
     html {
       scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      background: var(--bg-deep);
-      color: var(--text-cream);
+      background: var(--bg-primary);
+      color: var(--text-primary);
       font-family: var(--font-body);
       min-height: 100vh;
       overflow-x: hidden;
-      line-height: 1.6;
+      padding: 0;
+      margin: 0;
     }
 
     /* ═══════════════════════════════════════════════════════
-       ATMOSPHERIC BACKGROUND
+       SCROLLBAR
     ═══════════════════════════════════════════════════════ */
-    .atmosphere {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
+    ::-webkit-scrollbar {
+      width: 3px;
     }
-
-    .atmosphere .veil {
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 70% 40% at 30% 20%, rgba(196, 168, 106, 0.04), transparent 70%),
-        radial-gradient(ellipse 60% 50% at 70% 80%, rgba(139, 122, 90, 0.03), transparent 60%);
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
     }
-
-    .atmosphere .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.3;
-      will-change: transform;
-      animation: orbFloat 25s ease-in-out infinite alternate;
-    }
-
-    .atmosphere .orb:nth-child(2) {
-      width: 500px;
-      height: 500px;
-      top: -150px;
-      right: -100px;
-      background: radial-gradient(circle, rgba(196, 168, 106, 0.08), transparent 70%);
-      animation-duration: 30s;
-      animation-delay: -5s;
-    }
-
-    .atmosphere .orb:nth-child(3) {
-      width: 350px;
-      height: 350px;
-      bottom: -100px;
-      left: -50px;
-      background: radial-gradient(circle, rgba(139, 122, 90, 0.06), transparent 70%);
-      animation-duration: 20s;
-      animation-delay: -10s;
-      animation-direction: alternate-reverse;
-    }
-
-    .atmosphere .orb:nth-child(4) {
-      width: 200px;
-      height: 200px;
-      top: 50%;
-      left: 50%;
-      background: radial-gradient(circle, rgba(232, 213, 163, 0.04), transparent 70%);
-      animation-duration: 35s;
-      animation-delay: -18s;
-    }
-
-    @keyframes orbFloat {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, -40px) scale(1.15); }
-    }
-
-    /* ── Grain Texture ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.015;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 150px 150px;
+    ::-webkit-scrollbar-thumb {
+      background: var(--neon-green);
+      border-radius: 10px;
     }
 
     /* ═══════════════════════════════════════════════════════
-       HEADER — Museum Entrance
+       HEADER — Minimal & Bold
     ═══════════════════════════════════════════════════════ */
-    .museum-header {
-      position: relative;
-      z-index: 2;
-      padding: clamp(50px, 10vh, 100px) clamp(20px, 5vw, 60px) clamp(30px, 5vh, 50px);
-      text-align: center;
-      background: linear-gradient(180deg, rgba(12, 10, 8, 0.95) 0%, rgba(12, 10, 8, 0.6) 100%);
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .museum-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(196, 168, 106, 0.06), transparent 70%);
-      pointer-events: none;
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .header-ornament {
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 32px;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 255, 65, 0.06);
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
       gap: 12px;
-      margin-bottom: var(--space-lg);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
     }
 
-    .header-ornament .line {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-subtle));
+    .header-brand .accent {
+      color: var(--neon-green);
     }
 
-    .header-ornament .line:last-child {
-      background: linear-gradient(90deg, var(--gold-subtle), transparent);
-    }
-
-    .header-ornament .diamond {
+    .header-brand .dot {
       width: 6px;
       height: 6px;
-      background: var(--gold-mid);
-      transform: rotate(45deg);
-      opacity: 0.4;
+      background: var(--neon-green);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
     }
 
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 18px 6px 14px;
-      border-radius: 100px;
-      background: rgba(196, 168, 106, 0.06);
-      border: 1px solid rgba(196, 168, 106, 0.08);
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      color: var(--gold-subtle);
-      font-weight: 500;
-      margin-bottom: var(--space-lg);
-    }
-
-    .header-badge i {
-      font-size: 0.55rem;
-      opacity: 0.5;
-    }
-
-    .site-title {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: clamp(3rem, 10vw, 6.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--text-cream);
-      margin-bottom: var(--space-sm);
-      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .site-title .gold {
-      color: var(--gold-bright);
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    .site-subtitle {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(1rem, 1.8vw, 1.4rem);
-      color: var(--text-warm);
-      letter-spacing: 0.15em;
-      opacity: 0.6;
-      margin-bottom: var(--space-md);
-    }
-
-    .header-divider {
-      width: 80px;
-      height: 1px;
-      margin: var(--space-lg) auto;
-      background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
-      opacity: 0.3;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.6); }
     }
 
     .header-stats {
       display: flex;
-      justify-content: center;
-      gap: clamp(24px, 5vw, 56px);
-      flex-wrap: wrap;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      font-weight: 300;
-    }
-
-    .header-stats span {
-      display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .header-stats i {
-      color: var(--gold-subtle);
-      opacity: 0.3;
-      font-size: 0.6rem;
-    }
-
-    .header-stats .number {
-      color: var(--text-cream);
-      font-weight: 500;
-      font-size: 0.85rem;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       MAIN GALLERY
-    ═══════════════════════════════════════════════════════ */
-    .gallery-container {
-      position: relative;
-      z-index: 1;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 0 clamp(12px, 2vw, 32px) clamp(40px, 6vh, 80px);
-    }
-
-    /* ── Gallery Controls ── */
-    .gallery-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      padding: var(--space-md) 0 var(--space-lg);
-      border-bottom: 1px solid var(--border-light);
-      margin-bottom: var(--space-xl);
-    }
-
-    .controls-left {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
+      gap: 24px;
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       letter-spacing: 0.05em;
     }
 
-    .controls-left .count-main {
-      color: var(--text-cream);
+    .header-stats .stat-number {
+      color: var(--text-primary);
       font-weight: 600;
-      font-size: 1.1rem;
-      font-family: var(--font-display);
+      font-size: 0.9rem;
     }
 
-    .controls-left .count-label {
-      opacity: 0.5;
+    .header-stats .stat-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border-color);
     }
 
-    .controls-right {
-      display: flex;
-      gap: 4px;
+    /* ═══════════════════════════════════════════════════════
+       MAIN GRID — Masonry with instant loading
+    ═══════════════════════════════════════════════════════ */
+    .main {
+      padding-top: 80px;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 60px;
     }
 
-    .ctrl-btn {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s var(--ease-smooth);
-      font-size: 0.8rem;
-    }
-
-    .ctrl-btn:hover {
-      background: rgba(196, 168, 106, 0.05);
-      border-color: var(--border-glow);
-      color: var(--text-cream);
-    }
-
-    .ctrl-btn.active {
-      background: rgba(196, 168, 106, 0.08);
-      border-color: rgba(196, 168, 106, 0.2);
-      color: var(--gold-mid);
-    }
-
-    /* ── Gallery Grid ── */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: var(--space-md);
-      opacity: 0;
-      animation: galleryFade 0.8s var(--ease-expo) 0.2s forwards;
+      gap: 12px;
+      margin-top: 20px;
     }
 
-    .gallery-grid.compact {
-      gap: 6px;
-    }
-
-    .gallery-grid.compact .art-card {
-      border-radius: 4px;
-      padding: 3px;
-    }
-
-    .gallery-grid.compact .art-card .card-overlay {
-      opacity: 0;
-    }
-
-    .gallery-grid.compact .art-card:hover .card-overlay {
-      opacity: 1;
-    }
-
-    @keyframes galleryFade {
-      to { opacity: 1; }
-    }
-
-    /* ── Art Card ── */
-    .art-card {
+    /* ── Photo Card ── */
+    .photo-card {
       position: relative;
-      border-radius: 12px;
-      overflow: hidden;
       background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      padding: 5px;
-      cursor: zoom-in;
-      transition: all 0.5s var(--ease-spring);
-      will-change: transform;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
       aspect-ratio: auto;
     }
 
-    .art-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(196, 168, 106, 0.15), transparent 60%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+    .photo-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--neon-green);
+      box-shadow: var(--shadow-neon), var(--shadow-card);
     }
 
-    .art-card:hover::before {
-      opacity: 1;
-    }
-
-    .art-card:hover {
-      transform: translateY(-6px) scale(1.012);
-      border-color: rgba(196, 168, 106, 0.15);
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 60px rgba(196, 168, 106, 0.04);
-    }
-
-    .art-card img {
+    .photo-card img {
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 8px;
-      transition: all 0.6s var(--ease-smooth);
-      will-change: transform;
-      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      background: var(--bg-card);
     }
 
-    .art-card:hover img {
-      filter: brightness(0.9) saturate(1.08);
+    .photo-card:hover img {
+      transform: scale(1.02);
+      filter: brightness(0.85) saturate(1.1);
     }
 
     /* ── Card Overlay ── */
-    .card-overlay {
+    .photo-card .overlay {
       position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 14px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
       opacity: 0;
-      transition: opacity 0.4s var(--ease-smooth);
-      display: flex;
-      align-items: flex-end;
-      padding: var(--space-md);
-      pointer-events: none;
-      z-index: 1;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
     }
 
-    .art-card:hover .card-overlay {
+    .photo-card:hover .overlay {
       opacity: 1;
+      transform: translateY(0);
     }
 
-    .card-overlay .art-title {
-      font-family: var(--font-display);
+    .photo-card .overlay .title {
+      font-size: 0.65rem;
       font-weight: 400;
-      font-style: italic;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      color: rgba(255, 255, 255, 0.6);
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    .card-overlay .art-number {
-      font-size: 0.55rem;
-      color: rgba(255, 255, 255, 0.2);
+    .photo-card .overlay .index {
+      font-size: 0.5rem;
+      color: var(--neon-green);
+      opacity: 0.4;
       font-weight: 300;
       letter-spacing: 0.1em;
-      margin-left: auto;
-      padding-left: var(--space-sm);
     }
 
-    /* ── Skeleton ── */
-    .skeleton-card {
-      border-radius: 12px;
+    /* ── Loading Placeholder ── */
+    .placeholder {
+      background: var(--bg-card);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      animation: shimmer 1.8s ease-in-out infinite;
       background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0.02) 25%, 
-        rgba(255, 255, 255, 0.04) 50%, 
-        rgba(255, 255, 255, 0.02) 75%
+        var(--bg-card) 25%, 
+        var(--bg-hover) 50%, 
+        var(--bg-card) 75%
       );
       background-size: 200% 100%;
-      animation: shimmer 1.8s ease-in-out infinite;
-      aspect-ratio: 3/4;
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
     }
 
     @keyframes shimmer {
@@ -521,87 +251,67 @@
       100% { background-position: 200% 0; }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       STATE CONTAINERS
-    ═══════════════════════════════════════════════════════ */
-    .state-container {
+    /* ── Empty State ── */
+    .empty-state {
       grid-column: 1 / -1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: clamp(80px, 20vh, 160px) 20px;
+      padding: 100px 20px;
       text-align: center;
-      gap: var(--space-lg);
+      gap: 16px;
     }
 
-    .state-container .state-icon {
-      width: 72px;
-      height: 72px;
+    .empty-state .icon {
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      border: 1px solid var(--border-light);
-      font-size: 2rem;
-      color: var(--gold-mid);
-      opacity: 0.2;
-    }
-
-    .state-container h3 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 1.6rem;
-      color: var(--text-warm);
-      letter-spacing: 0.02em;
-    }
-
-    .state-container p {
+      font-size: 1.5rem;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      max-width: 420px;
-      line-height: 1.8;
-      font-weight: 300;
     }
 
-    .state-container code {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 2px 12px;
+    .empty-state h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    .empty-state code {
+      background: var(--bg-card);
+      padding: 2px 10px;
       border-radius: 4px;
       font-size: 0.7rem;
-      color: var(--gold-mid);
-      border: 1px solid var(--border-light);
-      font-family: 'Monaco', 'Courier New', monospace;
-    }
-
-    .state-container .spinner {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid var(--border-light);
-      border-top-color: var(--gold-mid);
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+      color: var(--neon-green);
+      border: 1px solid var(--border-color);
     }
 
     /* ═══════════════════════════════════════════════════════
-       LIGHTBOX — Museum Experience
+       LIGHTBOX — Full screen minimal
     ═══════════════════════════════════════════════════════ */
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.94);
-      backdrop-filter: blur(40px) saturate(1.2);
+      background: rgba(0, 0, 0, 0.96);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s var(--ease-smooth);
+      transition: opacity 0.3s ease;
       padding: 20px;
     }
 
@@ -610,137 +320,125 @@
       pointer-events: all;
     }
 
-    .lightbox-backdrop {
+    .lightbox .backdrop {
       position: absolute;
       inset: 0;
       cursor: zoom-out;
     }
 
-    /* ── Lightbox Frame ── */
-    .lb-frame {
+    .lightbox .frame {
       position: relative;
       z-index: 2;
-      max-width: min(92vw, 1200px);
-      max-height: 88vh;
-      border-radius: 16px;
+      max-width: 90vw;
+      max-height: 85vh;
+      background: var(--bg-primary);
+      border: 1px solid rgba(0, 255, 65, 0.08);
+      border-radius: 4px;
       overflow: hidden;
-      background: var(--bg-deep);
-      border: 1px solid var(--border-light);
-      box-shadow: 
-        0 40px 120px rgba(0, 0, 0, 0.9),
-        0 0 80px rgba(196, 168, 106, 0.03);
-      transform: scale(0.92) translateY(30px);
-      transition: transform 0.5s var(--ease-spring), opacity 0.4s ease;
-      will-change: transform;
+      transform: scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .lightbox.open .lb-frame {
-      transform: scale(1) translateY(0);
+    .lightbox.open .frame {
+      transform: scale(1);
     }
 
-    .lb-frame img {
+    .lightbox .frame img {
       display: block;
       max-width: 100%;
-      max-height: 82vh;
+      max-height: 80vh;
       width: auto;
       height: auto;
       object-fit: contain;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
+      transition: transform 0.3s ease;
       touch-action: pinch-zoom;
-      background: var(--bg-deep);
     }
 
-    .lb-frame img.zoomed {
+    .lightbox .frame img.zoomed {
       transform: scale(1.8);
       cursor: zoom-out;
     }
 
-    /* ── Lightbox Toolbar ── */
-    .lb-toolbar {
+    /* ── Lightbox Controls ── */
+    .lb-controls {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       z-index: 3;
+      padding: 16px 20px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
       opacity: 0;
       transform: translateY(-100%);
-      transition: all 0.4s var(--ease-smooth);
+      transition: all 0.3s ease;
     }
 
-    .lightbox.open .lb-toolbar {
+    .lightbox.open .lb-controls {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .lb-toolbar .lb-filename {
+    .lb-controls .info {
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.35);
-      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.05em;
       font-weight: 300;
-      font-family: var(--font-body);
     }
 
-    .lb-toolbar .lb-actions {
+    .lb-controls .actions {
       display: flex;
       gap: 4px;
     }
 
     .lb-btn {
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      color: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s var(--ease-smooth);
-      font-size: 0.9rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .lb-btn:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(196, 168, 106, 0.2);
-      color: var(--text-cream);
-      transform: scale(1.05);
-    }
-
-    .lb-btn.close-btn:hover {
-      background: rgba(200, 80, 80, 0.15);
-      border-color: rgba(200, 80, 80, 0.2);
-      color: #ff8a8a;
-    }
-
-    /* ── Lightbox Navigation ── */
-    .lb-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      width: 48px;
-      height: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(12px);
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
       color: rgba(255, 255, 255, 0.3);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s var(--ease-smooth);
-      font-size: 1rem;
+      transition: all 0.2s ease;
+      font-size: 0.85rem;
+    }
+
+    .lb-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lb-btn.close:hover {
+      background: rgba(255, 50, 50, 0.1);
+      color: #ff6b6b;
+    }
+
+    /* ── Navigation ── */
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      color: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      font-size: 0.9rem;
       opacity: 0;
       pointer-events: none;
+      backdrop-filter: blur(8px);
     }
 
     .lightbox.open .lb-nav {
@@ -749,10 +447,9 @@
     }
 
     .lb-nav:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(196, 168, 106, 0.15);
-      color: var(--text-cream);
-      transform: translateY(-50%) scale(1.06);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(0, 255, 65, 0.1);
+      color: #fff;
     }
 
     .lb-nav.hidden {
@@ -760,28 +457,25 @@
       pointer-events: none !important;
     }
 
-    #lb-prev { left: 24px; }
-    #lb-next { right: 24px; }
+    #lbPrev { left: 16px; }
+    #lbNext { right: 16px; }
 
     /* ── Counter ── */
     .lb-counter {
       position: absolute;
-      bottom: 24px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.1);
       letter-spacing: 0.15em;
-      font-weight: 300;
       background: rgba(0, 0, 0, 0.3);
-      padding: 4px 16px;
+      padding: 4px 14px;
       border-radius: 100px;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.02);
       opacity: 0;
       transition: opacity 0.4s ease;
-      font-family: var(--font-body);
     }
 
     .lightbox.open .lb-counter {
@@ -789,91 +483,40 @@
     }
 
     /* ═══════════════════════════════════════════════════════
-       SCROLL TO TOP
+       SCROLL TOP
     ═══════════════════════════════════════════════════════ */
     #scrollTop {
       position: fixed;
-      bottom: 32px;
-      right: 32px;
-      z-index: 100;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--border-light);
+      bottom: 24px;
+      right: 24px;
+      z-index: 50;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-color);
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(16px);
-      color: var(--text-muted);
+      background: var(--bg-card);
+      color: var(--text-secondary);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s var(--ease-spring);
+      transition: all 0.3s ease;
       opacity: 0;
-      transform: translateY(10px) scale(0.9);
+      transform: translateY(10px);
       pointer-events: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     #scrollTop.show {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
       pointer-events: all;
     }
 
     #scrollTop:hover {
-      background: rgba(196, 168, 106, 0.08);
-      border-color: rgba(196, 168, 106, 0.2);
-      color: var(--gold-mid);
-      transform: translateY(-3px) scale(1.05);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════════════ */
-    .museum-footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: clamp(40px, 6vh, 80px) 20px;
-      border-top: 1px solid var(--border-light);
-      margin-top: var(--space-2xl);
-      background: linear-gradient(180deg, transparent, rgba(12, 10, 8, 0.5));
-    }
-
-    .museum-footer .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .museum-footer .footer-quote {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: 1rem;
-      color: var(--text-warm);
-      opacity: 0.3;
-      margin-bottom: var(--space-sm);
-      letter-spacing: 0.02em;
-    }
-
-    .museum-footer .footer-divider {
-      width: 40px;
-      height: 1px;
-      margin: var(--space-md) auto;
-      background: var(--border-light);
-    }
-
-    .museum-footer .footer-meta {
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      font-weight: 300;
-    }
-
-    .museum-footer .footer-meta i {
-      margin: 0 6px;
-      font-size: 0.4rem;
-      opacity: 0.3;
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+      transform: translateY(-2px);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -882,271 +525,184 @@
     @media (max-width: 1024px) {
       .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 14px;
+        gap: 10px;
       }
     }
 
     @media (max-width: 768px) {
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 10px;
+      .header {
+        padding: 12px 16px;
       }
-
-      .lb-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 0.8rem;
+      
+      .header-brand {
+        font-size: 1rem;
       }
-
-      #lb-prev { left: 12px; }
-      #lb-next { right: 12px; }
-
-      .lb-toolbar {
-        padding: 12px 14px;
-      }
-
-      .lb-btn {
-        width: 34px;
-        height: 34px;
-        font-size: 0.8rem;
-      }
-
-      .controls-left .count-label {
-        display: none;
-      }
-
+      
       .header-stats {
-        gap: 16px;
+        gap: 12px;
         font-size: 0.6rem;
       }
-
-      #scrollTop {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+      
+      .header-stats .stat-divider {
+        display: none;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 8px;
+      }
+      
+      .main {
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 72px;
+      }
+      
+      .lb-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 0.7rem;
+      }
+      
+      #lbPrev { left: 8px; }
+      #lbNext { right: 8px; }
+      
+      .lb-controls {
+        padding: 12px 14px;
+      }
+      
+      .lb-btn {
+        width: 32px;
+        height: 32px;
         font-size: 0.75rem;
       }
     }
 
     @media (max-width: 480px) {
       .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 6px;
       }
-
-      .art-card {
-        border-radius: 8px;
-        padding: 3px;
+      
+      .header-brand .dot {
+        width: 4px;
+        height: 4px;
       }
-
-      .art-card img {
-        border-radius: 6px;
-      }
-
-      .art-card:hover {
-        transform: translateY(-2px) scale(1.01);
-      }
-
-      .lb-frame {
-        border-radius: 8px;
-      }
-
-      .lb-toolbar .lb-filename {
-        font-size: 0.55rem;
-        max-width: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .gallery-controls {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-sm);
-      }
-    }
-
-    @media (max-width: 380px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 4px;
-      }
-
-      .art-card {
+      
+      .photo-card {
         border-radius: 4px;
-        padding: 2px;
+      }
+      
+      .photo-card .overlay .title {
+        font-size: 0.5rem;
       }
     }
 
     /* ═══════════════════════════════════════════════════════
-       SCROLLBAR — Elegant
+       FOOTER
     ═══════════════════════════════════════════════════════ */
-    ::-webkit-scrollbar {
+    .footer {
+      margin-top: 40px;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      font-weight: 300;
+    }
+
+    .footer .neon-dot {
+      display: inline-block;
       width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-deep);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(196, 168, 106, 0.15);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(196, 168, 106, 0.25);
-    }
-
-    ::selection {
-      background: rgba(196, 168, 106, 0.12);
-      color: var(--gold-bright);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       UTILITY — Prevent overflow
-    ═══════════════════════════════════════════════════════ */
-    .no-scroll {
-      overflow: hidden !important;
-    }
-
-    /* Fix for Font Awesome icons in lightbox */
-    .lb-btn i,
-    .lb-nav i {
-      pointer-events: none;
+      height: 4px;
+      background: var(--neon-green);
+      border-radius: 50%;
+      margin: 0 8px;
+      opacity: 0.3;
     }
   </style>
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════════════════════
-       ATMOSPHERE
-  ═══════════════════════════════════════════════════════ -->
-  <div class="atmosphere" aria-hidden="true">
-    <div class="veil"></div>
-    <div class="orb"></div>
-    <div class="orb"></div>
-    <div class="orb"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
        HEADER
   ═══════════════════════════════════════════════════════ -->
-  <header class="museum-header" role="banner">
-    <div class="header-content">
-      <div class="header-ornament" aria-hidden="true">
-        <span class="line"></span>
-        <span class="diamond"></span>
-        <span class="line"></span>
-      </div>
-
-      <div class="header-badge">
-        <i class="fa-regular fa-compass"></i>
-        Curated Collection
-      </div>
-
-      <h1 class="site-title">
-        Nature's <span class="gold">Canvas</span>
-      </h1>
-
-      <p class="site-subtitle">Stories written by the wild</p>
-
-      <div class="header-divider"></div>
-
-      <div class="header-stats">
-        <span>
-          <i class="fa-regular fa-image"></i>
-          <span class="number" id="headerCount">0</span> photographs
-        </span>
-        <span>
-          <i class="fa-regular fa-calendar"></i>
-          <span id="yearDisplay"></span>
-        </span>
-        <span>
-          <i class="fa-regular fa-user"></i>
-          Prasad
-        </span>
-      </div>
+  <header class="header">
+    <div class="header-brand">
+      <span class="dot"></span>
+      <span>WILD<span class="accent">.</span></span>
+    </div>
+    <div class="header-stats">
+      <span>
+        <span class="stat-number" id="headerCount">0</span>
+        <span style="color:var(--text-muted);margin-left:4px;">images</span>
+      </span>
+      <span class="stat-divider"></span>
+      <span style="color:var(--text-muted);">
+        <i class="fa-regular fa-compass" style="font-size:0.6rem;margin-right:4px;"></i>
+        <span id="yearDisplay"></span>
+      </span>
     </div>
   </header>
 
   <!-- ═══════════════════════════════════════════════════════
-       MAIN GALLERY
+       MAIN
   ═══════════════════════════════════════════════════════ -->
-  <main class="gallery-container" role="main">
-    <!-- Controls -->
-    <div class="gallery-controls">
-      <div class="controls-left">
-        <span class="count-main" id="galleryCount">0</span>
-        <span class="count-label">photographs</span>
-      </div>
-      <div class="controls-right">
-        <button class="ctrl-btn active" id="btnNormal" title="Normal view" aria-label="Normal view">
-          <i class="fa-regular fa-grip"></i>
-        </button>
-        <button class="ctrl-btn" id="btnCompact" title="Compact view" aria-label="Compact view">
-          <i class="fa-regular fa-table-cells-large"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Gallery Grid -->
-    <div class="gallery-grid" id="gallery" role="list" aria-label="Photo gallery"></div>
+  <main class="main">
+    <div class="gallery-grid" id="gallery"></div>
   </main>
 
   <!-- ═══════════════════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════════════════ -->
-  <footer class="museum-footer" role="contentinfo">
-    <div class="footer-content">
-      <p class="footer-quote">
-        “In every walk with nature, one receives far more than he seeks.”
-      </p>
-      <div class="footer-divider"></div>
-      <p class="footer-meta">
-        <i class="fa-regular fa-star"></i>
-        <span id="footerCount">0</span> photographs
-        <i class="fa-regular fa-star"></i>
-      </p>
-    </div>
+  <footer class="footer">
+    <p>
+      <span class="neon-dot"></span>
+      <span id="footerCount">0</span> photographs
+      <span class="neon-dot"></span>
+      curated with purpose
+    </p>
   </footer>
 
   <!-- ═══════════════════════════════════════════════════════
-       SCROLL TO TOP
+       SCROLL TOP
   ═══════════════════════════════════════════════════════ -->
   <button id="scrollTop" aria-label="Back to top">
     <i class="fa-regular fa-arrow-up"></i>
   </button>
 
   <!-- ═══════════════════════════════════════════════════════
-       LIGHTBOX — Museum Quality
+       LIGHTBOX
   ═══════════════════════════════════════════════════════ -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
-    <div class="lightbox-backdrop" id="lbBackdrop"></div>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="backdrop" id="lbBackdrop"></div>
 
-    <button class="lb-nav hidden" id="lb-prev" aria-label="Previous image">
+    <button class="lb-nav hidden" id="lbPrev" aria-label="Previous">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
-    <button class="lb-nav hidden" id="lb-next" aria-label="Next image">
+    <button class="lb-nav hidden" id="lbNext" aria-label="Next">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
 
-    <div class="lb-frame" id="lbFrame">
+    <div class="frame" id="lbFrame">
       <img id="lbImg" src="" alt="" loading="eager" />
       <div class="lb-counter" id="lbCounter"></div>
     </div>
 
-    <div class="lb-toolbar">
-      <span class="lb-filename" id="lbFilename"></span>
-      <div class="lb-actions">
-        <a class="lb-btn" id="lbDownload" title="Download" aria-label="Download" download>
+    <div class="lb-controls">
+      <span class="info" id="lbFilename"></span>
+      <div class="actions">
+        <a class="lb-btn" id="lbDownload" title="Download" download>
           <i class="fa-regular fa-download"></i>
         </a>
-        <button class="lb-btn" id="lbZoom" title="Toggle zoom" aria-label="Toggle zoom">
+        <button class="lb-btn" id="lbZoom" title="Toggle zoom">
           <i class="fa-regular fa-magnifying-glass-plus"></i>
         </button>
-        <button class="lb-btn close-btn" id="lbClose" title="Close" aria-label="Close lightbox">
+        <button class="lb-btn close" id="lbClose" title="Close">
           <i class="fa-regular fa-xmark"></i>
         </button>
       </div>
@@ -1154,7 +710,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       JAVASCRIPT — High Performance Gallery
+       JAVASCRIPT — Instant Load All Images
   ═══════════════════════════════════════════════════════ -->
   <script>
     (() => {
@@ -1164,9 +720,7 @@
       const CONFIG = {
         path: 'images/',
         manifest: 'images/manifest.json',
-        formats: ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.bmp', '.tiff'],
-        preloadCount: 2,
-        skeletonCount: 8,
+        formats: ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.bmp', '.tiff', '.svg'],
       };
 
       // ─── STATE ──────────────────────────────────────
@@ -1174,62 +728,52 @@
       let loadedCount = 0;
       let currentIndex = -1;
       let isLightboxOpen = false;
-      const preloadCache = new Set();
 
       // ─── DOM REFS ──────────────────────────────────
       const gallery = document.getElementById('gallery');
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lbImg');
-      const lbFrame = document.getElementById('lbFrame');
       const lbBackdrop = document.getElementById('lbBackdrop');
       const lbClose = document.getElementById('lbClose');
       const lbZoom = document.getElementById('lbZoom');
       const lbDownload = document.getElementById('lbDownload');
-      const lbPrev = document.getElementById('lb-prev');
-      const lbNext = document.getElementById('lb-next');
+      const lbPrev = document.getElementById('lbPrev');
+      const lbNext = document.getElementById('lbNext');
       const lbFilename = document.getElementById('lbFilename');
       const lbCounter = document.getElementById('lbCounter');
       const scrollTopBtn = document.getElementById('scrollTop');
-      const btnNormal = document.getElementById('btnNormal');
-      const btnCompact = document.getElementById('btnCompact');
-      const galleryCount = document.getElementById('galleryCount');
       const headerCount = document.getElementById('headerCount');
       const footerCount = document.getElementById('footerCount');
       const yearDisplay = document.getElementById('yearDisplay');
 
-      // ─── HELPERS ────────────────────────────────────
-      const prettyName = (name) => name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-      const isElementVisible = (el) => {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight + 300 && rect.bottom > -300;
-      };
-
       // ─── YEAR ──────────────────────────────────────
       yearDisplay.textContent = new Date().getFullYear();
 
-      // ─── UPDATE COUNTS ─────────────────────────────
+      // ─── HELPERS ────────────────────────────────────
+      const prettyName = (name) => name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+
       function updateCounts() {
         const count = images.filter(Boolean).length;
-        galleryCount.textContent = count;
         headerCount.textContent = count;
         footerCount.textContent = count;
       }
 
       // ─── DISCOVER IMAGES ──────────────────────────
       async function discoverImages() {
+        // Try manifest first
         try {
           const res = await fetch(CONFIG.manifest);
           if (res.ok) {
             const list = await res.json();
             if (Array.isArray(list) && list.length) {
               images = list.map((f) => ({ src: CONFIG.path + f, name: f }));
-              renderGallery();
+              renderAllImages();
               return;
             }
           }
         } catch (_) {}
 
-        // Fallback: try directory listing
+        // Try directory listing
         try {
           const res = await fetch(CONFIG.path);
           if (res.ok) {
@@ -1241,155 +785,86 @@
               .map((h) => h.split('/').pop());
             if (names.length) {
               images = names.map((f) => ({ src: CONFIG.path + f, name: f }));
-              renderGallery();
+              renderAllImages();
               return;
             }
           }
         } catch (_) {}
 
-        // Empty state
+        // Empty
         images = [];
-        renderGallery();
+        renderAllImages();
       }
 
-      // ─── RENDER GALLERY ────────────────────────────
-      function renderGallery() {
+      // ─── RENDER ALL IMAGES — INSTANT ──────────────
+      function renderAllImages() {
         gallery.innerHTML = '';
 
         if (!images.length) {
           gallery.innerHTML = `
-            <div class="state-container">
-              <div class="state-icon"><i class="fa-regular fa-tree"></i></div>
-              <h3>No photographs yet</h3>
+            <div class="empty-state">
+              <div class="icon"><i class="fa-regular fa-image"></i></div>
+              <h2>No images found</h2>
               <p>Add images to <code>/images</code> and create<br />
-                 <code>images/manifest.json</code> listing them.</p>
+                 <code>images/manifest.json</code> listing all filenames.</p>
             </div>
           `;
           updateCounts();
           return;
         }
 
-        // Render skeletons
-        const skeletonCount = Math.min(CONFIG.skeletonCount, images.length);
-        for (let i = 0; i < skeletonCount; i++) {
-          const skeleton = document.createElement('div');
-          skeleton.className = 'skeleton-card';
-          skeleton.dataset.index = i;
-          gallery.appendChild(skeleton);
-        }
+        // Render ALL images immediately (no lazy loading, no skeletons)
+        images.forEach((data, idx) => {
+          const card = document.createElement('div');
+          card.className = 'photo-card';
+          card.dataset.index = idx;
+          card.setAttribute('role', 'listitem');
+          card.setAttribute('tabindex', '0');
 
-        // Load visible images progressively
-        let loaded = 0;
-        const total = images.length;
+          const img = document.createElement('img');
+          img.alt = prettyName(data.name);
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.src = data.src;
 
-        function loadVisibleBatch() {
-          const items = gallery.querySelectorAll('.skeleton-card, .art-card');
-          let loadedThisBatch = 0;
-          
-          for (const item of items) {
-            if (!isElementVisible(item)) continue;
-            const idx = parseInt(item.dataset.index);
-            if (isNaN(idx) || idx >= total || idx < 0) continue;
-            if (item.classList.contains('skeleton-card')) {
-              createArtCard(idx, item);
-              loadedThisBatch++;
+          const overlay = document.createElement('div');
+          overlay.className = 'overlay';
+          const title = document.createElement('div');
+          title.className = 'title';
+          title.textContent = prettyName(data.name);
+          const index = document.createElement('div');
+          index.className = 'index';
+          index.textContent = `#${idx + 1}`;
+          overlay.appendChild(title);
+          overlay.appendChild(index);
+
+          card.appendChild(img);
+          card.appendChild(overlay);
+          gallery.appendChild(card);
+
+          // Track load
+          img.addEventListener('load', () => {
+            loadedCount++;
+            updateCounts();
+          });
+
+          img.addEventListener('error', () => {
+            images[idx] = null;
+            card.remove();
+            updateCounts();
+          });
+
+          // Click to open lightbox
+          card.addEventListener('click', () => openLightbox(idx));
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openLightbox(idx);
             }
-          }
-          
-          loaded += loadedThisBatch;
-          if (loaded < total) {
-            requestAnimationFrame(loadVisibleBatch);
-          }
-        }
-
-        // Start loading
-        requestAnimationFrame(loadVisibleBatch);
-
-        // Intersection Observer for lazy loading
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              const el = entry.target;
-              if (el.classList.contains('skeleton-card')) {
-                const idx = parseInt(el.dataset.index);
-                if (!isNaN(idx) && idx < total && idx >= 0) {
-                  createArtCard(idx, el);
-                }
-                observer.unobserve(el);
-              }
-            }
-          },
-          { rootMargin: '300px 0px 300px 0px' }
-        );
-
-        // Observe skeletons
-        for (const skeleton of gallery.querySelectorAll('.skeleton-card')) {
-          observer.observe(skeleton);
-        }
+          });
+        });
 
         updateCounts();
-      }
-
-      // ─── CREATE ART CARD ───────────────────────────
-      function createArtCard(idx, skeletonEl) {
-        const data = images[idx];
-        if (!data) return;
-
-        const card = document.createElement('div');
-        card.className = 'art-card';
-        card.dataset.index = idx;
-        card.setAttribute('role', 'listitem');
-        card.setAttribute('tabindex', '0');
-
-        const img = document.createElement('img');
-        img.alt = prettyName(data.name);
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.src = data.src;
-
-        // Overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'card-overlay';
-        const title = document.createElement('span');
-        title.className = 'art-title';
-        title.textContent = prettyName(data.name);
-        const number = document.createElement('span');
-        number.className = 'art-number';
-        number.textContent = `#${idx + 1}`;
-        overlay.appendChild(title);
-        overlay.appendChild(number);
-
-        card.appendChild(img);
-        card.appendChild(overlay);
-
-        // Replace skeleton
-        if (skeletonEl) {
-          skeletonEl.replaceWith(card);
-        } else {
-          gallery.appendChild(card);
-        }
-
-        // Track load
-        img.addEventListener('load', () => {
-          loadedCount++;
-          updateCounts();
-        });
-
-        img.addEventListener('error', () => {
-          images[idx] = null;
-          card.remove();
-          updateCounts();
-        });
-
-        // Click to open lightbox
-        card.addEventListener('click', () => openLightbox(idx));
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openLightbox(idx);
-          }
-        });
       }
 
       // ─── LIGHTBOX ──────────────────────────────────
@@ -1410,22 +885,20 @@
 
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('no-scroll');
+        document.body.style.overflow = 'hidden';
 
         updateNavButtons();
-        preloadNeighbors(idx);
-
-        setTimeout(() => lbClose.focus(), 150);
+        setTimeout(() => lbClose.focus(), 100);
       }
 
       function closeLightbox() {
         isLightboxOpen = false;
         lightbox.classList.remove('open');
         lightbox.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('no-scroll');
+        document.body.style.overflow = '';
         setTimeout(() => {
           if (!isLightboxOpen) lbImg.src = '';
-        }, 500);
+        }, 400);
         currentIndex = -1;
       }
 
@@ -1463,29 +936,6 @@
         lbNext.classList.toggle('hidden', total <= 1);
       }
 
-      // ─── PRELOAD NEIGHBORS ────────────────────────
-      function preloadNeighbors(idx) {
-        const toPreload = [];
-        for (let i = 1; i <= CONFIG.preloadCount; i++) {
-          const nextIdx = idx + i;
-          if (nextIdx < images.length && images[nextIdx]) {
-            toPreload.push(images[nextIdx].src);
-          }
-          const prevIdx = idx - i;
-          if (prevIdx >= 0 && images[prevIdx]) {
-            toPreload.push(images[prevIdx].src);
-          }
-        }
-
-        for (const src of toPreload) {
-          if (!preloadCache.has(src)) {
-            const img = new Image();
-            img.src = src;
-            preloadCache.add(src);
-          }
-        }
-      }
-
       // ─── LIGHTBOX EVENTS ──────────────────────────
       lbClose.addEventListener('click', closeLightbox);
       lbBackdrop.addEventListener('click', closeLightbox);
@@ -1502,12 +952,8 @@
         }
       });
 
-      // Double-click to toggle zoom
-      lbImg.addEventListener('dblclick', () => {
-        lbZoom.click();
-      });
+      lbImg.addEventListener('dblclick', () => lbZoom.click());
 
-      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') {
@@ -1524,89 +970,33 @@
         }
       });
 
-      // Swipe support
+      // Swipe
       let touchStartX = 0;
       let touchStartY = 0;
-      lightbox.addEventListener(
-        'touchstart',
-        (e) => {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-        },
-        { passive: true }
-      );
+      lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
 
-      lightbox.addEventListener(
-        'touchend',
-        (e) => {
-          const dx = e.changedTouches[0].clientX - touchStartX;
-          const dy = e.changedTouches[0].clientY - touchStartY;
-          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-            navigateLightbox(dx < 0 ? 1 : -1);
-          }
-        },
-        { passive: true }
-      );
-
-      // ─── VIEW TOGGLE ──────────────────────────────
-      btnNormal.addEventListener('click', () => {
-        gallery.classList.remove('compact');
-        btnNormal.classList.add('active');
-        btnCompact.classList.remove('active');
-      });
-
-      btnCompact.addEventListener('click', () => {
-        gallery.classList.add('compact');
-        btnCompact.classList.add('active');
-        btnNormal.classList.remove('active');
-      });
+      lightbox.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+          navigateLightbox(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
 
       // ─── SCROLL TO TOP ────────────────────────────
-      window.addEventListener(
-        'scroll',
-        () => {
-          scrollTopBtn.classList.toggle('show', window.scrollY > 400);
-        },
-        { passive: true }
-      );
+      window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+      }, { passive: true });
 
       scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // ─── RESIZE HANDLER ───────────────────────────
-      let resizeTimer;
-      window.addEventListener(
-        'resize',
-        () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-            const skeletons = gallery.querySelectorAll('.skeleton-card');
-            for (const sk of skeletons) {
-              if (isElementVisible(sk)) {
-                const idx = parseInt(sk.dataset.index);
-                if (!isNaN(idx) && idx < images.length) {
-                  createArtCard(idx, sk);
-                }
-              }
-            }
-          }, 300);
-        },
-        { passive: true }
-      );
-
       // ─── INIT ──────────────────────────────────────
       discoverImages();
-
-      // Fix for Font Awesome icons not showing (prevent flash)
-      document.addEventListener('DOMContentLoaded', () => {
-        // Ensure all icons are properly loaded
-        const icons = document.querySelectorAll('.fa-regular, .fa-solid');
-        icons.forEach(icon => {
-          // Force reflow
-          void icon.offsetHeight;
-        });
-      });
 
     })();
   </script>
