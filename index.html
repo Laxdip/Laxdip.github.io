@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Nature's Canvas — Stories Written By Nature</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome 6 — SOLID icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nature's Canvas</title>
+  
     /* ═══════════════════════════════════════════════════
        TOKENS
     ═══════════════════════════════════════════════════ */
@@ -279,10 +273,10 @@
     /* Strip the ugly checkerboard from original */
     #gallery{
       background:none !important;
+    }
       padding:0 !important;
       border-radius:0 !important;
       margin-top:0 !important;
-    }
     .gallery{column-count:2;column-gap:14px;}
     @media(min-width:600px) {.gallery{column-count:2;column-gap:16px;}}
     @media(min-width:820px) {.gallery{column-count:3;column-gap:18px;}}
@@ -919,10 +913,10 @@
     const max = images.length - 1;
     if (n < 0) n = max;
     if (n > max) n = 0;
-    let tries = 0;
-    while (!images[n] && tries++ < images.length) {
       n += dir;
       if (n < 0) n = max;
+    let tries = 0;
+    while (!images[n] && tries++ < images.length) {
       if (n > max) n = 0;
     }
     openLB(n);
