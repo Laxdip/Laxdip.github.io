@@ -24,7 +24,6 @@
       min-height: 100vh;
     }
 
-    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: #0a0a0a; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -80,9 +79,6 @@
       border: 1px solid rgba(255,255,255,0.04);
       cursor: pointer;
       transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .card:hover {
@@ -161,7 +157,6 @@
       color: rgba(255,255,255,0.2);
     }
 
-    /* ─── LOADING ─── */
     .loading {
       grid-column: 1 / -1;
       text-align: center;
@@ -172,7 +167,7 @@
     }
 
     /* ═══════════════════════════════════════════════════════
-       LIGHTBOX — AUTO-ADJUSTING FRAME
+       LIGHTBOX — EACH IMAGE ITS OWN SIZE
     ═══════════════════════════════════════════════════════ */
     .lightbox {
       position: fixed;
@@ -183,38 +178,36 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 80px 40px 100px;
+      padding: 20px;
     }
 
     .lightbox.open {
       display: flex;
     }
 
-    /* ── Click backdrop to close ── */
     .lightbox .backdrop {
       position: absolute;
       inset: 0;
       cursor: zoom-out;
     }
 
-    /* ── FRAME — auto-sizes to image ── */
+    /* ── FRAME — EXACT IMAGE SIZE ── */
     .lightbox .frame {
       position: relative;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 90vw;
-      max-height: 80vh;
+      display: inline-block;
       background: transparent;
+      line-height: 0;
+      max-width: 92vw;
+      max-height: 82vh;
     }
 
     .lightbox .frame img {
       display: block;
-      max-width: 90vw;
-      max-height: 80vh;
       width: auto;
       height: auto;
+      max-width: 92vw;
+      max-height: 82vh;
       object-fit: contain;
       border-radius: 4px;
       transition: transform 0.3s ease;
@@ -226,7 +219,7 @@
       cursor: zoom-out;
     }
 
-    /* ─── CONTROLS — OUTSIDE THE IMAGE ─── */
+    /* ─── CONTROLS — FLOATING BELOW ─── */
     .lb-controls {
       position: fixed;
       bottom: 32px;
@@ -235,8 +228,8 @@
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
+      gap: 4px;
+      padding: 6px 10px;
       background: rgba(20, 20, 20, 0.85);
       backdrop-filter: blur(16px);
       border-radius: 100px;
@@ -244,8 +237,8 @@
     }
 
     .lb-btn {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border: none;
       border-radius: 50%;
       background: transparent;
@@ -254,7 +247,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       transition: all 0.2s ease;
     }
 
@@ -270,7 +263,7 @@
 
     .lb-divider {
       width: 1px;
-      height: 24px;
+      height: 20px;
       background: rgba(255,255,255,0.04);
     }
 
@@ -310,25 +303,25 @@
     /* ─── INFO ─── */
     .lb-info {
       position: fixed;
-      bottom: 88px;
+      bottom: 84px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-size: 0.6rem;
+      gap: 16px;
+      font-size: 0.55rem;
       color: rgba(255,255,255,0.06);
       letter-spacing: 0.08em;
       font-weight: 300;
     }
 
-    .lb-info .counter {
-      color: rgba(255,255,255,0.06);
-    }
-
     .lb-info .filename {
       color: rgba(255,255,255,0.04);
+    }
+
+    .lb-info .counter {
+      color: rgba(255,255,255,0.06);
     }
 
     /* ─── SCROLL TOP ─── */
@@ -372,59 +365,31 @@
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
       }
       
-      .lightbox { padding: 60px 16px 80px; }
+      .lightbox { padding: 12px; }
+      .lightbox .frame { max-width: 96vw; max-height: 78vh; }
+      .lightbox .frame img { max-width: 96vw; max-height: 78vh; }
       
-      .lb-nav { 
-        width: 36px; 
-        height: 36px; 
-        font-size: 0.7rem; 
-      }
-      
+      .lb-nav { width: 36px; height: 36px; font-size: 0.7rem; }
       #lbPrev { left: 8px; }
       #lbNext { right: 8px; }
       
-      .lb-controls { 
-        padding: 6px 10px; 
-        bottom: 16px; 
-        gap: 4px; 
-      }
+      .lb-controls { padding: 4px 8px; bottom: 16px; gap: 2px; }
+      .lb-btn { width: 32px; height: 32px; font-size: 0.7rem; }
       
-      .lb-btn { 
-        width: 34px; 
-        height: 34px; 
-        font-size: 0.75rem; 
-      }
+      .lb-info { bottom: 64px; font-size: 0.45rem; gap: 10px; }
       
-      .lb-info {
-        bottom: 68px;
-        font-size: 0.5rem;
-        gap: 12px;
-        flex-direction: column;
-        gap: 4px;
-      }
-      
-      #scrollTop { 
-        bottom: 16px; 
-        right: 16px; 
-        width: 34px; 
-        height: 34px; 
-        font-size: 0.65rem; 
-      }
+      #scrollTop { bottom: 16px; right: 16px; width: 34px; height: 34px; font-size: 0.65rem; }
     }
 
     @media (max-width: 480px) {
-      .gallery { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 6px; 
-        padding: 12px 8px 32px; 
-      }
-      
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 12px 8px 32px; }
       .card { border-radius: 6px; }
       .card .info { padding: 10px; }
       .card .info .name { font-size: 0.55rem; }
       
-      .lightbox { padding: 40px 8px 72px; }
-      .lightbox .frame img { max-width: 95vw; max-height: 70vh; }
+      .lightbox { padding: 8px; }
+      .lightbox .frame { max-width: 98vw; max-height: 70vh; }
+      .lightbox .frame img { max-width: 98vw; max-height: 70vh; }
     }
   </style>
 </head>
@@ -445,28 +410,23 @@
   <button id="scrollTop"><i class="fa-regular fa-arrow-up"></i></button>
 
   <!-- ═══════════════════════════════════════════════════════
-       LIGHTBOX — AUTO-ADJUSTING
+       LIGHTBOX
   ═══════════════════════════════════════════════════════ -->
   <div class="lightbox" id="lightbox">
-    <!-- Backdrop to close -->
     <div class="backdrop" id="backdrop"></div>
 
-    <!-- Navigation -->
     <button class="lb-nav hidden" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="lb-nav hidden" id="lbNext"><i class="fa-solid fa-chevron-right"></i></button>
 
-    <!-- Frame — auto-sizes to image -->
     <div class="frame" id="frame">
       <img id="lbImg" src="" alt="" />
     </div>
 
-    <!-- Info below image -->
-    <div class="lb-info" id="lbInfo">
+    <div class="lb-info">
       <span class="filename" id="lbFilename"></span>
       <span class="counter" id="lbCounter"></span>
     </div>
 
-    <!-- Controls — always visible, outside image -->
     <div class="lb-controls">
       <button class="lb-btn" id="lbZoom"><i class="fa-regular fa-magnifying-glass-plus"></i></button>
       <span class="lb-divider"></span>
@@ -480,16 +440,13 @@
     (function() {
       'use strict';
 
-      // ─── CONFIG ──────────────────────────────────
       const PATH = 'images/';
       const MANIFEST = 'images/manifest.json';
       const FORMATS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'];
 
-      // ─── STATE ──────────────────────────────────
       let images = [];
       let currentIndex = -1;
 
-      // ─── DOM ─────────────────────────────────────
       const gallery = document.getElementById('gallery');
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lbImg');
@@ -504,15 +461,12 @@
       const scrollTop = document.getElementById('scrollTop');
       const yearEl = document.getElementById('year');
 
-      // ─── YEAR ────────────────────────────────────
       yearEl.textContent = new Date().getFullYear();
 
-      // ─── HELPERS ────────────────────────────────
       function cleanName(name) {
         return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
       }
 
-      // ─── LOAD IMAGES ────────────────────────────
       async function loadImages() {
         try {
           const res = await fetch(MANIFEST);
@@ -547,7 +501,6 @@
         render();
       }
 
-      // ─── RENDER ──────────────────────────────────
       function render() {
         gallery.innerHTML = '';
 
@@ -599,23 +552,19 @@
         });
       }
 
-      // ─── LIGHTBOX ────────────────────────────────
       function openLightbox(index) {
         if (!images[index]) return;
         currentIndex = index;
 
         const data = images[index];
         
-        // Reset zoom state
         lbImg.classList.remove('zoomed');
         const zoomIcon = lbZoom.querySelector('i');
         zoomIcon.className = 'fa-regular fa-magnifying-glass-plus';
         
-        // Set image
         lbImg.src = data.src;
         lbImg.alt = cleanName(data.name);
         
-        // Update info
         lbFilename.textContent = data.name;
         lbDownload.href = data.src;
         lbDownload.setAttribute('download', data.name);
@@ -669,7 +618,6 @@
         lbNext.classList.toggle('hidden', total <= 1);
       }
 
-      // ─── LIGHTBOX EVENTS ────────────────────────
       lbClose.addEventListener('click', closeLightbox);
       backdrop.addEventListener('click', closeLightbox);
 
@@ -688,7 +636,6 @@
 
       lbImg.addEventListener('dblclick', () => lbZoom.click());
 
-      // ─── KEYBOARD ────────────────────────────────
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
@@ -696,7 +643,6 @@
         if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1); }
       });
 
-      // ─── SWIPE ────────────────────────────────────
       let startX = 0, startY = 0;
       lightbox.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
@@ -711,7 +657,6 @@
         }
       }, { passive: true });
 
-      // ─── SCROLL TOP ──────────────────────────────
       window.addEventListener('scroll', () => {
         scrollTop.classList.toggle('show', window.scrollY > 400);
       }, { passive: true });
@@ -720,7 +665,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // ─── INIT ─────────────────────────────────────
       loadImages();
 
     })();
